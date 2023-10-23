@@ -1,0 +1,137 @@
+.navbar {
+	width: auto;
+	height: 70px;
+	background-color: pink;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding-left:3%;
+}
+
+.navbar h1 {
+	color: white;
+	font-size: 25px;
+	margin-left: 20px;
+}
+
+.white_btn {
+	border: none;
+	outline: none;
+	padding: 12px 0;
+	background-color: white;
+	border-radius: 20px;
+	width: 120px;
+	font-weight: bold;
+	font-size: 14px;
+	cursor: pointer;
+	margin-right: 20px;
+}
+.white_btn:hover{
+	background-color: rgb(244, 225, 228);
+}
+.pink_btn {
+	border: 2px solid black;
+	outline: none;
+	background-color: pink;
+	border-radius: 20px;
+	width: 100%;
+	height: 30px;
+	font-weight: bold;
+	cursor: pointer;
+}
+.pink_btn:hover{
+	background-color: rgb(243, 121, 141);
+}
+.tab {
+	display: flex;
+	flex-wrap: wrap;
+	margin:0;
+}
+.tab_rec_par {
+	width: 10%;
+}
+  
+.tab_rec {
+	margin: 0;
+	text-align: center;
+	height: 25px;
+	border-left: 3px solid black;
+	border-top: 3px solid black;
+	border-bottom: 3px solid black;
+}
+.tab_rec1 {
+	width:10%;
+	margin: 0;
+	text-align: center;
+	height: 25px;
+	border-left: 3px solid black;
+	border-top: 3px solid black;
+	border-bottom: 3px solid black;
+}
+.tab_rec:last-child {
+	border-left: 3px solid black;
+	border-top: 3px solid black;
+	border-bottom: 3px solid black;
+	border-right: 3px solid black;
+}
+.tab_rec1:last-child {
+	border-left: 3px solid black;
+	border-top: 3px solid black;
+	border-bottom: 3px solid black;
+	border-right: 3px solid black;
+}
+.tab_menu{
+	display: flex;
+	flex-wrap: wrap;
+	margin:0 38.4%;
+}
+.popup{
+	width: 20%;
+	height: 600px;
+	border: 5px solid black;
+	border-radius: 20px;
+	padding: 10px;
+	background-color: white;
+	position: absolute;
+	top: 8%;
+  	left: 34%;
+}
+.form_label{
+	width: 134px;
+}
+.menu {
+    position: relative;
+    display: inline-block;
+  }
+  
+.menu_content {
+display: none;
+position: absolute;
+min-width: 160px;
+z-index: 1;
+}
+
+.menu:hover .menu_content {
+display: block;
+}
+
+.menu_item {
+    border: none;
+	outline: none;
+	padding: 12px 0;
+	border-radius: 20px;
+    background-color: white;
+	width: 120px;
+	font-weight: bold;
+	font-size: 14px;
+	cursor: pointer;
+	margin-right: 20px;
+    
+}
+.menu_item:hover{
+    background-color: rgb(244, 225, 228);
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+.pad{
+	margin:3% 20%;
+}
