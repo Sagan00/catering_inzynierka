@@ -4,9 +4,9 @@ import Foot from "../Foot";
 import styles from "./styles.module.css";
 
 const Calc = () => {
-    const [weight, setWeight] = useState(75);
-    const [height, setHeight] = useState(175);
-    const [age, setAge] = useState(25);
+    const [weight] = useState(75);
+    const [height] = useState(175);
+    const [age] = useState(25);
     const [gender, setGender] = useState("male");
     const [activityLevel, setActivityLevel] = useState(1.2);
     const [goal, setGoal] = useState("maintain");
@@ -21,11 +21,14 @@ const Calc = () => {
         // Dodaj inne pola do przechowywania błędów
       };
     const [form, setForm] = useState({ age: 0, weight: 0, height: 0 });
+    //const [form, setForm] = useState({ age: '', weight: '', height: '' });
     const [errors, setErrors] = useState(initialErrors);
     const elementRef = useRef(null);
 
     const scrollToElement = () => {
-        elementRef.current.scrollIntoView({ behavior: 'smooth' });
+        if (elementRef.current !== null) {
+            elementRef.current.scrollIntoView({ behavior: 'smooth' });
+        }
       };
 
     const validateForm = () => {
@@ -54,6 +57,7 @@ const Calc = () => {
     
     const calculateBMR = () => {
         let bmrResult = 0;
+        const { weight, height, age } = form;
         if (gender === "male") {
             bmrResult = 66 + (13.75 * weight) + (5.003 * height) - (6.755 * age);
         } else {
@@ -79,10 +83,12 @@ const Calc = () => {
 
     const handleSubmit = () => {
     const isValid = validateForm();
-
+    
     if (isValid) {
       calculateBMR();
-      
+      scrollToElement();
+    }else{
+        setBMR(0);
     }
   };
     
@@ -137,14 +143,14 @@ const Calc = () => {
                         <option value="lose">Schudnięcie</option>
                         <option value="gain">Zwiększenie masy ciała</option>
                     </select>
-                    <button onClick={() => {
+                    <button ref={elementRef} onClick={() => {
                         handleSubmit();
-                        scrollToElement();
+                        //scrollToElement();
                         }}>
                         Oblicz
                     </button>
                 </div>
-                {bmr > 0 && <p className={styles.result} ref={elementRef}>Twoje BMR wynosi: {bmr}</p>}
+                {bmr > 0 && <p className={styles.result} >Twoje BMR wynosi: {bmr}</p>}
                 {bmr > 0 && <div className={styles.macros}>
                     <h2>Makroskładniki:</h2>
                     <p>Białko: {protein}g ({(bmr > 0 ? ((protein * 4 / bmr) * 100).toFixed(1) : 0)}%)</p>

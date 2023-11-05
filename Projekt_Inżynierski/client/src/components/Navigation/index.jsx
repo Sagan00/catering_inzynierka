@@ -1,19 +1,30 @@
 import styles from "./styles.module.css"
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Logout from "../Logout";
 import { Link } from 'react-router-dom';
-const Nav = () => {
-    return (
-            <nav className={styles.navbar}>
-                <h1><Link to="/" className={styles.link_elem}>Ctering</Link></h1>
-                <Link to="/menu" className={styles.link_elem}>Menu</Link>
-                <Link to="/cart" className={styles.link_elem}>Koszyk</Link>
-                <Link to="/calc" className={styles.link_elem}>Kalkulator BMR</Link>
-                <Link to="/about" className={styles.link_elem}>O nas</Link>
-                <div className={styles.tab}>
-                    <Logout/>
-                </div>
-            </nav>
-    )
-}
-export default Nav
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Navbar, Nav, Container } from 'react-bootstrap';
+
+const Navigation = () => {
+  return (
+    <Navbar className={styles.pinkNavbar} bg="pink" variant="light" expand="lg">
+      <Container>
+        <Navbar.Brand as={Link} to="/" className="text-white">Ctering</Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="me-auto">
+            <Nav.Link as={Link} to="/menu" className="text-white">Menu</Nav.Link>
+            <Nav.Link as={Link} to="/cart" className="text-white">Koszyk</Nav.Link>
+            <Nav.Link as={Link} to="/calc" className="text-white">Kalkulator BMR</Nav.Link>
+            <Nav.Link as={Link} to="/about" className="text-white">O nas</Nav.Link>
+          </Nav>
+          <Nav>
+            <Logout />
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
+  );
+};
+
+export default Navigation;
