@@ -1,23 +1,36 @@
 .main_container{
     padding: 20px 50px;
 }
-/* styles.module.css */
-
-.meals_container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    text-align: center;
-}
-.slider_container {
+/* menuitem css */
+.navContainer {
+    position: sticky;
+    top: 0;
+    z-index: 1000; /* Adjust z-index as needed */
+    background-color: white; /* Set background color as needed */
+  }
+/* menuitem css */
+.custom_row {
+    height: 60vh;
+    margin: 1px;
+  }
+  
+  .red_col {
+    background-color: white;
+  }
+  
+  .blue_col {
+    background-color: white;
+  }
+  
+  .slider_container {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    width: 90%;
 }
 .meal_tile {
-    width: 300px;
+    width: 500px;
     border: 1px solid #ccc;
     border-radius: 5px;
     overflow: hidden;

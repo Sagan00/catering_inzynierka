@@ -1,13 +1,15 @@
 import styles from "./styles.module.css"
-import React, { useEffect, useState } from "react";
-import Nav from "../Navigation";
+import React, { } from "react";
+import Navigation from "../Navigation";
 import Foot from "../Foot";
 const Main = () => {
+    const email = localStorage.getItem("email");
     return (
         <div>
-            <Nav/>
+            <Navigation/>
             <div className={styles.main_container}>
                 <h1>Ctering</h1>
+                {email}
             </div>
             <Foot/>
         </div>

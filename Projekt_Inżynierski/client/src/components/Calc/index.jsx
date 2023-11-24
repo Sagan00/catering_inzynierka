@@ -1,12 +1,9 @@
 import React, { useState, useRef  } from "react";
-import Nav from "../Navigation";
+import Navigation from "../Navigation";
 import Foot from "../Foot";
 import styles from "./styles.module.css";
 
 const Calc = () => {
-    const [weight] = useState(75);
-    const [height] = useState(175);
-    const [age] = useState(25);
     const [gender, setGender] = useState("male");
     const [activityLevel, setActivityLevel] = useState(1.2);
     const [goal, setGoal] = useState("maintain");
@@ -95,7 +92,7 @@ const Calc = () => {
 
     return (
         <div>
-            <Nav />
+            <Navigation />
             <div className={styles.main_container}>
                 <h1>Kalkulator BMR</h1>
                 <div className={styles.form_container}>

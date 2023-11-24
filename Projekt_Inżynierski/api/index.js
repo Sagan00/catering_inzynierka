@@ -3,10 +3,14 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const userRoutes = require("./routes/users");
+const usereditRoutes = require("./routes/useredit");
 const authRoutes = require("./routes/auth");
 const menuRoutes = require("./routes/menu")
+const orderRoutes = require("./routes/order");
 const { User } = require("./models/user");
 const { Meal } = require("./models/meal");
+const { Menu } = require("./models/menu");
+const { Orders } = require("./models/orders");
 
 //middleware
 app.use(express.json());
@@ -29,10 +33,30 @@ Meal.sync()
 .catch((error) => {
   console.error("Błąd synchronizacji tabeli:", error);
 });
+Menu.sync()
+.then(() => {
+  console.log(
+    "Tabela Menu została utworzona lub zsynchronizowana z bazą danych."
+  );
+})
+.catch((error) => {
+  console.error("Błąd synchronizacji tabeli:", error);
+});
+Orders.sync()
+.then(() => {
+  console.log(
+    "Tabela Orders została utworzona lub zsynchronizowana z bazą danych."
+  );
+})
+.catch((error) => {
+  console.error("Błąd synchronizacji tabeli:", error);
+});
 
 app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/menu", menuRoutes);
+app.use("/api/user", usereditRoutes);
+app.use("/api/order", orderRoutes);
 
 const port = process.env.PORT || 8080;
 app.listen(port, () => console.log(`Nasłuchiwanie na porcie ${port}`));
