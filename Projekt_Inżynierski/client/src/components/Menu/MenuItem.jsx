@@ -4,6 +4,7 @@ import React, { forwardRef, useState, useEffect } from "react";
 import { Container, Row, Col, Button, Carousel, Modal } from "react-bootstrap";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Table from 'react-bootstrap/Table';
 
 
 const MenuItem = forwardRef(({ meals, category}, ref) => {
@@ -14,13 +15,20 @@ const MenuItem = forwardRef(({ meals, category}, ref) => {
   const [totalCarbo, setTotalCarbo] = useState(0);
   const [totalFat, setTotalFat] = useState(0);
   const [showModal, setShowModal] = useState(false);
+  const [shouldNavigateToCart, setShouldNavigateToCart] = useState(false);
   const navigate = useNavigate();
+  const [show, setShow] = useState(false);
+  
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   //const [responseOrder, setresponseOrder] = useState("Brak informacji o zmianie zamówienia!");
 
   useEffect(() => {
     // Reset index i wybraną potrawę po zmianie kategorii
     setSelectedMeal(null);
   }, [category]);
+
 
   useEffect(() => {
     // Oblicz sumę pól 'price' i 'calories' dla potraw w danej kategorii
@@ -63,26 +71,36 @@ const MenuItem = forwardRef(({ meals, category}, ref) => {
     axios.put('http://localhost:8080/api/order', dataToSend)
       .then((response) => {
         console.log('Data sent successfully:', response.data);
+        
       })
       .catch((error) => {
         console.error('Error sending data:', error);
         // Możesz dodać obsługę błędu, np. wyświetlenie komunikatu o błędzie
       })
-      navigate('/cart');
+      handleShow(true);
   }
 };
+  const toCart = () => {
+    navigate('/cart');
+  };
   return (
     <div ref={ref}>
       <Container fluid>
         <Row className={styles.custom_row}>
           <Col xs={3} className={styles.red_col}>
-            <p>{category}</p>
-            <p>Total Price: {totalPrice}</p>
-            <p>Total Calories: {totalCalories}</p>
-            <p>Total Protein: {totalProtein}</p>
-            <p>Total Carbo: {totalCarbo}</p>
-            <p>Total Fat: {totalFat}</p>
+          <Table striped variant="danger">
+          <thead>
+          <tr><th colSpan={2}>{category}</th></tr>
+          </thead>
+          <tbody>
+          <tr><td>Cena za 1 dzień </td><td>{totalPrice}</td></tr>
+          <tr><td>Kalorie</td> <td>{totalCalories}</td></tr>
+          <tr><td>Białko</td> <td>{totalProtein}</td></tr>
+          <tr><td>Węglowodany</td> <td>{totalCarbo}</td></tr>
+          <tr><td>Tłuszcze</td><td>{totalFat}</td></tr>
+          </tbody>
             <Button onClick={handleSelectButtonClick}>Wybierz dietę</Button>
+          </Table>
           </Col>
           <Col xs={9} className={styles.blue_col}>
             <div className={styles.slider_container}>
@@ -121,6 +139,21 @@ const MenuItem = forwardRef(({ meals, category}, ref) => {
                   className={styles.selected_meal_image}
                 />
               </Modal.Body>
+            </Modal>
+            <Modal
+              show={show}
+              onHide={handleClose}
+              backdrop="static"
+              keyboard={false}
+            >
+              <Modal.Header>
+                <Modal.Title>Zamówienie dodano do koszyka!</Modal.Title>
+              </Modal.Header>
+              <Modal.Footer>
+                <Button variant="secondary" onClick={toCart}>
+                  Koszyk
+                </Button>
+              </Modal.Footer>
             </Modal>
           </Col>
         </Row>

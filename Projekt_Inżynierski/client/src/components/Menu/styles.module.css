@@ -79,3 +79,14 @@
     width: 100%;
     height: 300px;
 }
+.pinkTable {
+    /* Dostosuj ten kolor do swoich preferencji */
+  }
+  
+.pinkTable tbody tr:nth-child(odd) {
+    background-color: #ffcccc; /* Różowy kolor dla nieparzystych wierszy */
+  }
+  
+.pinkTable tbody tr:nth-child(even) {
+    background-color: #ffe6e6; /* Jasnoróżowy kolor dla parzystych wierszy */
+  }

@@ -65,4 +65,24 @@ router.put("/", async (req, res) => {
       res.status(500).json({ message: "Internal Server Error" });
     }
   });
+  router.delete("/:orderId", async (req, res) => {
+    try {
+      const orderId = req.params.orderId;
+  
+      // Check if the order with the given ID exists
+      const orderToDelete = await Orders.findByPk(orderId);
+  
+      if (!orderToDelete) {
+        return res.status(404).json({ message: "Order not found" });
+      }
+  
+      // Delete the order
+      await orderToDelete.destroy();
+  
+      res.status(200).json({ message: "Order deleted successfully" });
+    } catch (error) {
+      console.error("Error:", error);
+      res.status(500).json({ message: "Internal Server Error" });
+    }
+  });
 module.exports = router;

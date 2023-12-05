@@ -10,7 +10,12 @@ const Navigation = () => {
     <Navbar className={styles.pinkNavbar} bg="pink" variant="light" expand="lg">
       <Container>
         <Navbar.Brand as={Link} to="/" className="text-white">
-          Ctering
+        <img
+                    src={process.env.PUBLIC_URL + "/img/ctering-modified.png"}
+                    alt="Ctering"
+                    width={'120'}
+                    className={styles.meal_image}
+                  />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">

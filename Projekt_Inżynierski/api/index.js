@@ -7,6 +7,7 @@ const usereditRoutes = require("./routes/useredit");
 const authRoutes = require("./routes/auth");
 const menuRoutes = require("./routes/menu")
 const orderRoutes = require("./routes/order");
+const cartMeals = require("./routes/cartmeals")
 const { User } = require("./models/user");
 const { Meal } = require("./models/meal");
 const { Menu } = require("./models/menu");
@@ -57,6 +58,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/menu", menuRoutes);
 app.use("/api/user", usereditRoutes);
 app.use("/api/order", orderRoutes);
+app.use("/api/cart_meals", cartMeals);
 
 const port = process.env.PORT || 8080;
 app.listen(port, () => console.log(`Nasłuchiwanie na porcie ${port}`));
