@@ -7,6 +7,7 @@ const usereditRoutes = require("./routes/useredit");
 const authRoutes = require("./routes/auth");
 const menuRoutes = require("./routes/menu")
 const orderRoutes = require("./routes/order");
+const mealsList = require("./routes/mealsList");
 const cartMeals = require("./routes/cartmeals")
 const { User } = require("./models/user");
 const { Meal } = require("./models/meal");
@@ -55,6 +56,7 @@ Orders.sync()
 
 app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
+app.use("/api/mealsList", mealsList);
 app.use("/api/menu", menuRoutes);
 app.use("/api/user", usereditRoutes);
 app.use("/api/order", orderRoutes);

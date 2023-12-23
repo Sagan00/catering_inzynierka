@@ -4,9 +4,11 @@ import Login from "./components/Login"
 import Main from "./components/Main"
 import About from "./components/About"
 import Calc from "./components/Calc"
+import Meals from "./components/MealsList" 
 import Cart from "./components/Cart"
 import Menu from "./components/Menu"
 import EditUser from "./components/EditUser"
+
 function App() {
   const user = localStorage.getItem("token")
   return (
@@ -19,6 +21,8 @@ function App() {
       <Route path="/calc" element={<Navigate replace to="/login" />} />
       {user &&<Route path="/cart" element={<Cart/>} />}
       <Route path="/cart" element={<Navigate replace to="/login" />} />
+      {user &&<Route path="/mealsList" element={<Meals/>} />}
+      <Route path="/mealsList" element={<Navigate replace to="/login" />} />
       {user &&<Route path="/menu" element={<Menu/>} />}
       <Route path="/menu" element={<Navigate replace to="/login" />} />
       {user &&<Route path="/edituser" element={<EditUser/>} />}
