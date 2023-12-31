@@ -1,116 +1,43 @@
-/*
-import styles from "./styles.module.css"
+import styles from "./styles.module.css";
 import React from "react";
 import Navigation from "../Navigation";
 import Foot from "../Foot";
 const About = () => {
-    return (
-        <div>
-            <Navigation/>
-            <div className={styles.main_container}>
-                <h1>O nas</h1>
-            </div>
-            <Foot/>
-        </div>
-    )
-}
-export default About
-*/
-import React from "react";
-import {
-  MDBBtn,
-  MDBCard,
-  MDBCardBody,
-  MDBCardImage,
-  MDBCol,
-  MDBContainer,
-  MDBIcon,
-  MDBRow,
-} from "mdb-react-ui-kit";
-
-const About = () => {
   return (
-    <section className="vh-100" style={{ backgroundColor: "#fdccbc" }}>
-      <MDBContainer className="h-100">
-        <MDBRow className="justify-content-center align-items-center h-100">
-          <MDBCol>
+    <div>
+      <Navigation />
+      <div className={styles.main_container}>
+        <div className={styles.content}>
+          <div className={styles.aboutContainer}>
+            <h2>O nas</h2>
             <p>
-              <span className="h2">Shopping Cart </span>
-              <span className="h4">(1 item in your cart)</span>
+              Ctering to firma cateringowa, która oferuje wysokiej jakości
+              posiłki dostosowane do indywidualnych potrzeb i preferencji
+              klientów. Naszym celem jest zapewnienie zdrowych i smacznych dań,
+              które pomogą osiągnąć i utrzymać optymalną formę oraz dobrą
+              kondycję. Oferujemy szeroki wybór diet dostosowanych do różnych
+              potrzeb, takich jak dieta wegetariańska, wegańska, bezglutenowa i
+              niskokaloryczna. Nasz zespół doświadczonych dietetyków dba o to,
+              aby każda dieta była zbilansowana i dostarczała wszystkich
+              potrzebnych substancji odżywczych. Ctering to nie tylko smaczne
+              posiłki i wygodne funkcje na stronie internetowej, ale również
+              profesjonalna obsługa klienta. Zapraszamy do skorzystania z
+              naszych usług cateringowych i odkrycia zdrowych posiłków dla
+              ciebie i twojego zdrowia!
             </p>
-
-            <MDBCard className="mb-4">
-              <MDBCardBody className="p-4">
-                <MDBRow className="align-items-center">
-                  <MDBCol md="2">
-                    <MDBCardImage
-                      fluid
-                      src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/1.webp"
-                      alt="Generic placeholder image"
-                    />
-                  </MDBCol>
-                  <MDBCol md="2" className="d-flex justify-content-center">
-                    <div>
-                      <p className="small text-muted mb-4 pb-2">Name</p>
-                      <p className="lead fw-normal mb-0">iPad Air</p>
-                    </div>
-                  </MDBCol>
-                  <MDBCol md="2" className="d-flex justify-content-center">
-                    <div>
-                      <p className="small text-muted mb-4 pb-2">Color</p>
-                      <p className="lead fw-normal mb-0">
-                        <MDBIcon
-                          fas
-                          icon="circle me-2"
-                          style={{ color: "#fdd8d2" }}
-                        />
-                        pink rose
-                      </p>
-                    </div>
-                  </MDBCol>
-                  <MDBCol md="2" className="d-flex justify-content-center">
-                    <div>
-                      <p className="small text-muted mb-4 pb-2">Quantity</p>
-                      <p className="lead fw-normal mb-0">1</p>
-                    </div>
-                  </MDBCol>
-                  <MDBCol md="2" className="d-flex justify-content-center">
-                    <div>
-                      <p className="small text-muted mb-4 pb-2">Price</p>
-                      <p className="lead fw-normal mb-0">$799</p>
-                    </div>
-                  </MDBCol>
-                  <MDBCol md="2" className="d-flex justify-content-center">
-                    <div>
-                      <p className="small text-muted mb-4 pb-2">Total</p>
-                      <p className="lead fw-normal mb-0">$799</p>
-                    </div>
-                  </MDBCol>
-                </MDBRow>
-              </MDBCardBody>
-            </MDBCard>
-
-            <MDBCard className="mb-5">
-              <MDBCardBody className="p-4">
-                <div className="float-end">
-                  <p className="mb-0 me-5 d-flex align-items-center">
-                    <span className="small text-muted me-2">Order total:</span>
-                    <span className="lead fw-normal">$799</span>
-                  </p>
-                </div>
-              </MDBCardBody>
-            </MDBCard>
-
-            <div className="d-flex justify-content-end">
-              <MDBBtn color="light" size="lg" className="me-2">
-                Continue shopping
-              </MDBBtn>
-              <MDBBtn size="lg">Add to cart</MDBBtn>
-            </div>
-          </MDBCol>
-        </MDBRow>
-      </MDBContainer>
-    </section>
+          </div>
+          <div className={styles.imageContainer}>
+            <img
+              src="/img/aboutPicture.png"
+              alt="Food"
+              width="600"
+              height="510"
+            />
+          </div>
+        </div>
+      </div>
+      <Foot />
+    </div>
   );
-}
-export default About
+};
+export default About;
