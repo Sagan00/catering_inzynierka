@@ -9,10 +9,12 @@ const menuRoutes = require("./routes/menu")
 const orderRoutes = require("./routes/order");
 const mealsList = require("./routes/mealsList");
 const cartMeals = require("./routes/cartmeals")
+const contactForm = require("./routes/contactform")
 const { User } = require("./models/user");
 const { Meal } = require("./models/meal");
 const { Menu } = require("./models/menu");
 const { Orders } = require("./models/orders");
+const { Form } = require("./models/form");
 
 //middleware
 app.use(express.json());
@@ -53,6 +55,16 @@ Orders.sync()
 .catch((error) => {
   console.error("Błąd synchronizacji tabeli:", error);
 });
+Form.sync()
+.then(() => {
+  console.log(
+    "Tabela Form została utworzona lub zsynchronizowana z bazą danych."
+  );
+})
+.catch((error) => {
+  console.error("Błąd synchronizacji tabeli:", error);
+});
+
 
 app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
@@ -61,6 +73,7 @@ app.use("/api/menu", menuRoutes);
 app.use("/api/user", usereditRoutes);
 app.use("/api/order", orderRoutes);
 app.use("/api/cart_meals", cartMeals);
+app.use("/api/contactForm", contactForm);
 
 const port = process.env.PORT || 8080;
 app.listen(port, () => console.log(`Nasłuchiwanie na porcie ${port}`));

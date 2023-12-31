@@ -7,6 +7,7 @@ import Calc from "./components/Calc"
 import Meals from "./components/MealsList" 
 import Cart from "./components/Cart"
 import Menu from "./components/Menu"
+import Contact from "./components/Contact"
 import EditUser from "./components/EditUser"
 
 function App() {
@@ -23,6 +24,8 @@ function App() {
       <Route path="/cart" element={<Navigate replace to="/login" />} />
       {user &&<Route path="/mealsList" element={<Meals/>} />}
       <Route path="/mealsList" element={<Navigate replace to="/login" />} />
+      {user &&<Route path="/contact" element={<Contact/>} />}
+      <Route path="/contact" element={<Navigate replace to="/login" />} />
       {user &&<Route path="/menu" element={<Menu/>} />}
       <Route path="/menu" element={<Navigate replace to="/login" />} />
       {user &&<Route path="/edituser" element={<EditUser/>} />}
