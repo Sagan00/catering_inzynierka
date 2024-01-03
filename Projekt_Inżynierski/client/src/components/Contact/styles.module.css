@@ -1,0 +1,80 @@
+.content {
+  display: flex;
+  width: 100%;
+  margin: auto;
+}
+
+.formContainer {
+  width: 50%;
+}
+
+.imageContainer {
+  width: 50%;
+  margin-left: 10px; /* Zmniejszono margines */
+}
+
+.main_container {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin: auto;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+form {
+  width: 100%;
+}
+
+label {
+  display: block;
+}
+
+.checkboxInput {
+  width: 10%;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+}
+
+.checkboxLabel span {
+  font-size: 12px;
+  flex: 1; /* Rozciągnij tekst, aby zajmował dostępne miejsce */
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+  box-sizing: border-box;
+  resize: none;
+}
+
+button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+p {
+  color: green;
+  text-align: center;
+  margin-top: 10px;
+}

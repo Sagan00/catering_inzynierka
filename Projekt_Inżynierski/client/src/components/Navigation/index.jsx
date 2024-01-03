@@ -32,6 +32,9 @@ const Navigation = () => {
             <Nav.Link as={Link} to="/mealsList" className="text-white">
               Lista posiłków
             </Nav.Link>
+            <Nav.Link as={Link} to="/contact" className="text-white">
+              Kontakt
+            </Nav.Link>
             <Nav.Link as={Link} to="/about" className="text-white">
               O nas
             </Nav.Link>
