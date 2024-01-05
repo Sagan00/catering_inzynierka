@@ -3,7 +3,8 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const userRoutes = require("./routes/users");
-const usereditRoutes = require("./routes/useredit");
+//const usereditRoutes = require("./routes/useredit");
+const userAccountRoutes = require("./routes/account");
 const authRoutes = require("./routes/auth");
 const menuRoutes = require("./routes/menu")
 const orderRoutes = require("./routes/order");
@@ -70,7 +71,7 @@ app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/mealsList", mealsList);
 app.use("/api/menu", menuRoutes);
-app.use("/api/user", usereditRoutes);
+app.use("/api/user", userAccountRoutes);
 app.use("/api/order", orderRoutes);
 app.use("/api/cart_meals", cartMeals);
 app.use("/api/contactForm", contactForm);
