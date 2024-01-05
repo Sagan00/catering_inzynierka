@@ -9,7 +9,6 @@ import Meals from "./components/MealsList";
 import Cart from "./components/Cart";
 import Menu from "./components/Menu";
 import Contact from "./components/Contact";
-import ChangeName from "./components/ChangeName"; // Dodano import
 import Account from "./components/Account";
 
 function App() {
@@ -32,8 +31,6 @@ function App() {
       <Route path="/menu" element={<Navigate replace to="/login" />} />
       {user && <Route path="/account" element={<Account />} />}
       <Route path="/account" element={<Navigate replace to="/login" />} />
-      {user && <Route path="/changeName" element={<ChangeName />} />} {/* Dodano trasę */}
-      <Route path="/changeName" element={<Navigate replace to="/login" />} />
       <Route path="/signup" exact element={<Signup />} />
       <Route path="/login" exact element={<Login />} />
     </Routes>
