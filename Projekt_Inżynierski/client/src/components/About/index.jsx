@@ -10,7 +10,7 @@ const About = () => {
         <div className={styles.content}>
           <div className={styles.aboutContainer}>
             <h2>O nas</h2>
-            <p>
+            <p className={styles.aboutText}>
               Ctering to firma cateringowa, która oferuje wysokiej jakości
               posiłki dostosowane do indywidualnych potrzeb i preferencji
               klientów. Naszym celem jest zapewnienie zdrowych i smacznych dań,

@@ -1,6 +1,6 @@
 // components/Account/index.jsx
 import React, { useState, useEffect } from "react";
-import { Container, Button } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import axios from "axios";
 import styles from "./styles.module.css";
 import Navigation from "../Navigation";
@@ -75,38 +75,43 @@ const Account = () => {
   return (
     <div>
       <Navigation />
-      <Container>
-        <h1>Twoje dane</h1>
-        {userData && (
-          <div>
-            <p>Imię: {userData.firstName}</p>
-            <p>Nazwisko: {userData.lastName}</p>
-            <p>Email: {userData.email}</p>
+      <div className={styles.main_container}>
+        <div className={styles.content}>
+          <div className={styles.informationContainer}>
+            <h1>Twoje dane</h1>
+            {userData && (
+              <div>
+                <p>Imię i nazwisko: {userData.firstName} {userData.lastName}</p>
+                <p>Email: {userData.email}</p>
+              </div>
+            )}
+            {userAddress && (
+              <div>
+                <p>Adres: {userAddress.streetName} {userAddress.houseNumber}, {userAddress.apartmentNumber}</p>
+                <p>Miasto: {userAddress.city}</p>
+                <p>Kod pocztowy: {userAddress.postalCode}</p>
+              </div>
+            )}
+            <Button onClick={handleNameButtonClick} variant="primary">
+              Zmień imię i nazwisko
+            </Button>
+            <Button onClick={handleAddressButtonClick} variant="primary">
+              Dodaj lub zmień adres
+            </Button>
           </div>
-        )}
-        {userAddress && (
-          <div>
-            <p>Ulica: {userAddress.streetName}</p>
-            <p>Numer domu: {userAddress.houseNumber}</p>
-            <p>Numer mieszkania: {userAddress.apartmentNumber}</p>
-            <p>Miasto: {userAddress.city}</p>
-            <p>Kod pocztowy: {userAddress.postalCode}</p>
+          <div className={styles.formContainer}>
+            {showNameForm && (
+              <NameChange
+                userData={userData}
+                onUserDataChange={handleUserDataChange}
+              />
+            )}
+            {showAddressForm && (
+              <AddressChange onAddressAdded={handleAddressAdded} />
+            )}
           </div>
-        )}
-        <Button onClick={handleNameButtonClick} variant="primary">
-          Zmień imię i nazwisko
-        </Button>
-        {showNameForm && (
-          <NameChange
-            userData={userData}
-            onUserDataChange={handleUserDataChange}
-          />
-        )}
-        <Button onClick={handleAddressButtonClick} variant="primary">
-          Dodaj lub zmień adres
-        </Button>
-        {showAddressForm && <AddressChange onAddressAdded={handleAddressAdded} />}
-      </Container>
+        </div>
+      </div>
       <Foot />
     </div>
   );
