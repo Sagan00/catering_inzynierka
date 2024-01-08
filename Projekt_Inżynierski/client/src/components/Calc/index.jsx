@@ -142,7 +142,6 @@ const Calc = () => {
                     </select>
                     <button ref={elementRef} onClick={() => {
                         handleSubmit();
-                        //scrollToElement();
                         }}>
                         Oblicz
                     </button>
