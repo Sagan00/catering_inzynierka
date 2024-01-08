@@ -3,6 +3,7 @@ const router = express.Router();
 const { User } = require("../models/user");
 const { Menu } = require("../models/menu");
 const { Orders } = require("../models/orders");
+const { OrdersPaid } = require("../models/orders_paid");
 
 router.put("/", async (req, res) => {
     try {
@@ -29,13 +30,40 @@ router.put("/", async (req, res) => {
             id_menu: menuRecord ? menuRecord.id : null,
             id_user: userRecord ? userRecord.id : null,
             total_cost: totalPrice,
-            date: new Date(), // bieżąca data i czas
           });
 
           console.log("Nowe zamówienie utworzone:", newOrder);
     } catch (error) {
       console.error("Error:", error);
       res.status(500).json({ message: "Internal Server Error" });
+    }
+  });
+  router.put("/update", async (req, res) => {
+    try {
+       const orderId = req.body.id_order;
+      const totalCost = req.body.total_cost;
+      const startDate = req.body.start_date;
+      const endDate = req.body.end_date;
+      const orderToModify = await Orders.findByPk(orderId);
+  
+      if (!orderToModify) {
+        return res.status(404).json({ message: "Order not found" });
+      }
+        const id_menu = orderToModify.id_menu;
+        const id_user = orderToModify.id_user;
+
+          const newOrder = await OrdersPaid.create({
+            id_menu: id_menu,
+            id_user: id_user,
+            total_cost: totalCost,
+            start_date: startDate,
+            end_date: endDate,
+          }); /**/
+
+          console.log("Nowe zamówienie utworzone:",newOrder);
+    } catch (error) {
+      console.error("Error:", error);
+      res.status(500).json({ message: "Internal Server Error e" });
     }
   });
   router.post("/user_order", async (req, res) => {

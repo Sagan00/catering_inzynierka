@@ -15,6 +15,7 @@ const { Address } = require("./models/address");
 const { Meal } = require("./models/meal");
 const { Menu } = require("./models/menu");
 const { Orders } = require("./models/orders");
+const { OrdersPaid } = require("./models/orders_paid");
 const { Form } = require("./models/form");
 
 //middleware
@@ -29,6 +30,51 @@ User.sync()
   .catch((error) => {
     console.error("Błąd synchronizacji tabeli:", error);
   });
+Meal.sync()
+.then(() => {
+  console.log(
+    "Tabela Meals została utworzona lub zsynchronizowana z bazą danych."
+  );
+})
+.catch((error) => {
+  console.error("Błąd synchronizacji tabeli:", error);
+});
+Menu.sync()
+.then(() => {
+  console.log(
+    "Tabela Menu została utworzona lub zsynchronizowana z bazą danych."
+  );
+})
+.catch((error) => {
+  console.error("Błąd synchronizacji tabeli:", error);
+});
+Orders.sync()
+.then(() => {
+  console.log(
+    "Tabela Orders została utworzona lub zsynchronizowana z bazą danych."
+  );
+})
+.catch((error) => {
+  console.error("Błąd synchronizacji tabeli:", error);
+});
+OrdersPaid.sync()
+.then(() => {
+  console.log(
+    "Tabela OrdersPaid została utworzona lub zsynchronizowana z bazą danych."
+  );
+})
+.catch((error) => {
+  console.error("Błąd synchronizacji tabeli:", error);
+});
+Form.sync()
+.then(() => {
+  console.log(
+    "Tabela Form została utworzona lub zsynchronizowana z bazą danych."
+  );
+})
+.catch((error) => {
+  console.error("Błąd synchronizacji tabeli:", error);
+});
 
 Address.sync()
   .then(() => {
