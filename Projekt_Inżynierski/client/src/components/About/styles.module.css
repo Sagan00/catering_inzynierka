@@ -7,7 +7,6 @@
 .aboutContainer {
   width: 40%;
   margin-left: 100px;
-
 }
 
 .imageContainer {
@@ -30,8 +29,8 @@ h2 {
   font-size: 30px;
 }
 
-p {
-  text-align: left;
+.aboutText {
+  text-align: justify;
   color: black;
   margin-top: 10px;
   font-size: 20px;

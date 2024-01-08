@@ -41,7 +41,7 @@ const Navigation = () => {
           </Nav>
           <Nav className="justify-content-end">
             <Nav.Item>
-              <Nav.Link as={Link} to="/edituser" className="text-white">
+              <Nav.Link as={Link} to="/account" className="text-white">
                 Konto
               </Nav.Link>
             </Nav.Item>
