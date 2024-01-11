@@ -1,4 +1,5 @@
 const { Sequelize, DataTypes } = require("sequelize");
+const { User } = require("./user");
 const sequelize = new Sequelize("ctering", "root", "", {
   host: "localhost",
   dialect: "mysql",
@@ -7,8 +8,8 @@ const sequelize = new Sequelize("ctering", "root", "", {
 const Form = sequelize.define(
   "Form",
   {
-    email: {
-      type: DataTypes.STRING,
+    userId: {
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     topic: {
@@ -24,5 +25,7 @@ const Form = sequelize.define(
     timestamps: false,
   }
 );
+
+Form.belongsTo(User, { foreignKey: "userId", as: "user" });
 
 module.exports = { Form };

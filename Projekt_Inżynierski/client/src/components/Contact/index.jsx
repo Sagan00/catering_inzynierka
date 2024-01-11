@@ -1,3 +1,4 @@
+// components/ContactForm.js
 import styles from "./styles.module.css";
 import React, { useState } from "react";
 import axios from "axios";
@@ -6,7 +7,6 @@ import Foot from "../Foot";
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
-    email: "",
     topic: "",
     description: "",
     confirmation: false,
@@ -27,13 +27,18 @@ const ContactForm = () => {
     try {
       const response = await axios.post(
         "http://localhost:8080/api/contactForm",
-        formData
+        formData,
+        {
+          headers: {
+            Authorization: localStorage.getItem("email"),
+          },
+        }
       );
+
       console.log("Form data saved:", response.data);
 
       setSubmitSuccess(true);
       setFormData({
-        email: "",
         topic: "",
         description: "",
         confirmation: false,
@@ -57,16 +62,6 @@ const ContactForm = () => {
             )}
             <form onSubmit={handleSubmit}>
               <label>
-                Email:
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                />
-              </label>
-              <label>
                 Temat:
                 <input
                   type="text"
@@ -82,12 +77,13 @@ const ContactForm = () => {
                   name="description"
                   value={formData.description}
                   onChange={handleChange}
-                  rows = "4"
+                  rows="4"
                   required
                 />
               </label>
               <label className={styles.checkboxLabel}>
-                <input className={styles.checkboxInput}
+                <input
+                  className={styles.checkboxInput}
                   type="checkbox"
                   name="confirmation"
                   checked={formData.confirmation}
@@ -104,7 +100,12 @@ const ContactForm = () => {
             </form>
           </div>
           <div className={styles.imageContainer}>
-            <img src="/img/mapaGoogle.png" alt="Mapa Google" width="600" height="510"/>
+            <img
+              src="/img/mapaGoogle.png"
+              alt="Mapa Google"
+              width="600"
+              height="510"
+            />
           </div>
         </div>
       </div>
