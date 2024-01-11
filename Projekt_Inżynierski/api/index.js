@@ -10,6 +10,7 @@ const orderRoutes = require("./routes/order");
 const mealsList = require("./routes/mealsList");
 const cartMeals = require("./routes/cartmeals");
 const contactForm = require("./routes/contactform");
+const panelRoutes = require("./routes/panel");
 const { User } = require("./models/user");
 const { Role } = require("./models/role");
 const { Address } = require("./models/address");
@@ -96,6 +97,7 @@ app.use("/api/user", userAccountRoutes);
 app.use("/api/order", orderRoutes);
 app.use("/api/cart_meals", cartMeals);
 app.use("/api/contactForm", contactForm);
+app.use("/api/panel", panelRoutes);
 
 const port = process.env.PORT || 8080;
 app.listen(port, () => console.log(`Nasłuchiwanie na porcie ${port}`));
