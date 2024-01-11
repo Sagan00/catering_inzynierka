@@ -2,6 +2,7 @@
 
 const { Sequelize, DataTypes } = require("sequelize");
 const { Address } = require("./address");
+const { Role } = require("./role");
 const jwt = require("jsonwebtoken");
 const Joi = require("joi");
 const passwordComplexity = require("joi-password-complexity");
@@ -32,6 +33,10 @@ const User = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    roleId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
     addressId: {
       type: DataTypes.INTEGER,
       allowNull: true,
@@ -44,6 +49,7 @@ const User = sequelize.define(
 
 // Add this line to establish the association
 User.belongsTo(Address, { foreignKey: "addressId", as: "Address" });
+User.belongsTo(Role, { foreignKey: "roleId", as: "Role" });
 
 User.prototype.generateAuthToken = function () {
   const token = jwt.sign({ _id: this._id }, process.env.JWTPRIVATEKEY, {

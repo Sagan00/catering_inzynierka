@@ -11,6 +11,7 @@ const mealsList = require("./routes/mealsList");
 const cartMeals = require("./routes/cartmeals");
 const contactForm = require("./routes/contactform");
 const { User } = require("./models/user");
+const { Role } = require("./models/role");
 const { Address } = require("./models/address");
 const { Meal } = require("./models/meal");
 const { Menu } = require("./models/menu");
@@ -24,6 +25,16 @@ User.sync()
   .then(() => {
     console.log(
       "Tabela Users została utworzona lub zsynchronizowana z bazą danych."
+    );
+  })
+  .catch((error) => {
+    console.error("Błąd synchronizacji tabeli:", error);
+  });
+
+Role.sync()
+  .then(() => {
+    console.log(
+      "Tabela Roles została utworzona lub zsynchronizowana z bazą danych."
     );
   })
   .catch((error) => {
