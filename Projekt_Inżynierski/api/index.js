@@ -18,6 +18,7 @@ const { Meal } = require("./models/meal");
 const { Menu } = require("./models/menu");
 const { Orders } = require("./models/orders");
 const { Form } = require("./models/form");
+const { OrdersPaid } = require("./models/orders_paid");
 
 //middleware
 app.use(express.json());
@@ -74,6 +75,16 @@ Orders.sync()
   .then(() => {
     console.log(
       "Tabela Orders została utworzona lub zsynchronizowana z bazą danych."
+    );
+  })
+  .catch((error) => {
+    console.error("Błąd synchronizacji tabeli:", error);
+  });
+
+OrdersPaid.sync()
+  .then(() => {
+    console.log(
+      "Tabela OrdersPaid została utworzona lub zsynchronizowana z bazą danych."
     );
   })
   .catch((error) => {

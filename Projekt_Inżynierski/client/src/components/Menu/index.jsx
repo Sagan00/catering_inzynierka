@@ -37,11 +37,15 @@ const Cart = () => {
 
   const scrollToMenuItem = (index) => {
     if (menuItemRefs.current[index] && menuItemRefs.current[index].current) {
-      menuItemRefs.current[index].current.scrollIntoView({ behavior: "smooth" });
+      menuItemRefs.current[index].current.scrollIntoView({
+        behavior: "smooth",
+      });
     }
   };
 
-  const uniqueCategories = Array.from(new Set(meals.map((meal) => meal.category)));
+  const uniqueCategories = Array.from(
+    new Set(meals.map((meal) => meal.category))
+  );
 
   return (
     <div>
