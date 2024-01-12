@@ -8,7 +8,10 @@ const { Form } = require("../models/form");
 router.get("/users", async (req, res) => {
   try {
     const users = await User.findAll({
-      attributes: ["id", "firstName", "lastName", "email"],
+      attributes: ["id", "firstName", "lastName", "email", "roleId"],
+      where: {
+        roleId: 1, // Dodaj klauzulę, aby uwzględnić tylko użytkowników, których roleId wynosi 1 = User
+      },
     });
     res.json(users);
   } catch (error) {
@@ -16,7 +19,6 @@ router.get("/users", async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 });
-
 // Endpoint for getting messages of a specific user
 router.get("/messages/:userId", async (req, res) => {
   const userId = req.params.userId;
@@ -31,6 +33,23 @@ router.get("/messages/:userId", async (req, res) => {
     res.json(messages);
   } catch (error) {
     console.error("Error fetching messages:", error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+// Delete a specific message
+router.delete("/message/:messageId", async (req, res) => {
+  const messageId = req.params.messageId;
+
+  try {
+    // Delete the message with the given ID
+    await Form.destroy({
+      where: { id: messageId },
+    });
+
+    res.status(204).end(); // No content response
+  } catch (error) {
+    console.error("Error deleting message:", error);
     res.status(500).send("Internal Server Error");
   }
 });

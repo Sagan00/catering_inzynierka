@@ -4,6 +4,8 @@ import styles from "./styles.module.css";
 const Logout = () => {
   const handleLogout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("email");
+    localStorage.removeItem("role");
     window.location.reload();
   };
   return (

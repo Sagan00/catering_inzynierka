@@ -33,12 +33,8 @@ function App() {
       <Route path="/contact" element={<Navigate replace to="/login" />} />
       {user && <Route path="/menu" element={<Menu />} />}
       <Route path="/menu" element={<Navigate replace to="/login" />} />
-      {user && userRole === "Admin" && (
-        <Route path="/panel" element={<Panel />} />
-      )}
-      {user && userRole !== "Admin" && (
-        <Route path="/panel" element={<Navigate replace to="/login" />} />
-      )}
+      {user && userRole === "Admin" && <Route path="/panel" element={<Panel />} />}
+      <Route path="/panel" element={<Navigate replace to="/login" />} />
       {user && <Route path="/panel/messages/:userId" element={<UserMessages />} />}
       <Route path="/panel/messages/:userId" element={<Navigate replace to="/login" />} />
       {user && <Route path="/account" element={<Account />} />}

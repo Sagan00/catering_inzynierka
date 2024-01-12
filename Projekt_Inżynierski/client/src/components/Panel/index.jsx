@@ -40,7 +40,6 @@ const Panel = () => {
       <div className={styles.main_container}>
         <div className={styles.content}>
           <h1>Panel Administratora</h1>
-          <h2>Lista użytkowników</h2>
           <table>
             <thead>
               <tr>
