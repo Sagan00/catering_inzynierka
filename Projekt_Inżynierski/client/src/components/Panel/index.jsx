@@ -1,3 +1,4 @@
+// Panel.js
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./styles.module.css";
@@ -24,7 +25,13 @@ const Panel = () => {
 
   const handleDeleteUser = async (userId) => {
     try {
-      console.log(`Delete user with ID ${userId}`);
+      // Wywołaj API do usunięcia użytkownika
+      await axios.delete(`http://localhost:8080/api/panel/users/${userId}`);
+  
+      // Pobierz ponownie listę użytkowników po usunięciu
+      fetchUsers();
+  
+      console.log(`User with ID ${userId} deleted successfully`);
     } catch (error) {
       console.error("Error deleting user:", error);
     }

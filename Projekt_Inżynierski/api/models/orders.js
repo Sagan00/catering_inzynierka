@@ -31,6 +31,6 @@ const Orders = sequelize.define("Orders", {
 
 // Relacje między modelami
 Orders.belongsTo(Menu, { foreignKey: "id_menu", as: "menu" });
-Orders.belongsTo(User, { foreignKey: "id_user", as: "user" });
+Orders.belongsTo(User, { foreignKey: "id_user", as: "user", onDelete: "CASCADE"  });
 
 module.exports = { Orders };

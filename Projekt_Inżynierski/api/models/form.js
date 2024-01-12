@@ -26,6 +26,6 @@ const Form = sequelize.define(
   }
 );
 
-Form.belongsTo(User, { foreignKey: "userId", as: "user" });
+Form.belongsTo(User, { foreignKey: "userId", as: "user", onDelete: "CASCADE"  });
 
 module.exports = { Form };

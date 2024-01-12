@@ -48,7 +48,7 @@ const User = sequelize.define(
 );
 
 // Add this line to establish the association
-User.belongsTo(Address, { foreignKey: "addressId", as: "Address" });
+User.belongsTo(Address, { foreignKey: "addressId", as: "Address", onDelete: "CASCADE"  });
 User.belongsTo(Role, { foreignKey: "roleId", as: "Role" });
 
 User.prototype.generateAuthToken = function () {
