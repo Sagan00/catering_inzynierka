@@ -10,13 +10,16 @@ const orderRoutes = require("./routes/order");
 const mealsList = require("./routes/mealsList");
 const cartMeals = require("./routes/cartmeals");
 const contactForm = require("./routes/contactform");
+const panelRoutes = require("./routes/panel");
 const { User } = require("./models/user");
+const { Role } = require("./models/role");
 const { Address } = require("./models/address");
 const { Meal } = require("./models/meal");
 const { Menu } = require("./models/menu");
 const { Orders } = require("./models/orders");
 const { OrdersPaid } = require("./models/orders_paid");
 const { Form } = require("./models/form");
+const { OrdersPaid } = require("./models/orders_paid");
 
 //middleware
 app.use(express.json());
@@ -76,6 +79,16 @@ Form.sync()
   console.error("Błąd synchronizacji tabeli:", error);
 });
 
+Role.sync()
+  .then(() => {
+    console.log(
+      "Tabela Roles została utworzona lub zsynchronizowana z bazą danych."
+    );
+  })
+  .catch((error) => {
+    console.error("Błąd synchronizacji tabeli:", error);
+  });
+
 Address.sync()
   .then(() => {
     console.log(
@@ -113,6 +126,16 @@ Orders.sync()
   .catch((error) => {
     console.error("Błąd synchronizacji tabeli:", error);
   });
+
+OrdersPaid.sync()
+  .then(() => {
+    console.log(
+      "Tabela OrdersPaid została utworzona lub zsynchronizowana z bazą danych."
+    );
+  })
+  .catch((error) => {
+    console.error("Błąd synchronizacji tabeli:", error);
+  });
 Form.sync()
   .then(() => {
     console.log(
@@ -131,6 +154,7 @@ app.use("/api/user", userAccountRoutes);
 app.use("/api/order", orderRoutes);
 app.use("/api/cart_meals", cartMeals);
 app.use("/api/contactForm", contactForm);
+app.use("/api/panel", panelRoutes);
 
 const port = process.env.PORT || 8080;
 app.listen(port, () => console.log(`Nasłuchiwanie na porcie ${port}`));

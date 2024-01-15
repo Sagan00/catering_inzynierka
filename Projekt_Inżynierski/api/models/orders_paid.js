@@ -1,3 +1,4 @@
+
 const { Sequelize, DataTypes } = require("sequelize");
 const { Menu } = require("./menu");
 const { User } = require("./user");
@@ -41,6 +42,6 @@ const OrdersPaid = sequelize.define('OrdersPaid', {
   
   // Relacje między modelami
   OrdersPaid.belongsTo(Menu, { foreignKey: 'id_menu', as: 'menu' });
-  OrdersPaid.belongsTo(User, { foreignKey: 'id_user', as: 'user' });
+  OrdersPaid.belongsTo(User, { foreignKey: 'id_user', as: 'user', onDelete: "CASCADE"  });
 
   module.exports = { OrdersPaid };

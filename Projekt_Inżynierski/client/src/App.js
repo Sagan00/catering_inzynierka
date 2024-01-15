@@ -5,17 +5,21 @@ import Login from "./components/Login";
 import Main from "./components/Main";
 import About from "./components/About";
 import Calc from "./components/Calc";
-import Meals from "./components/MealsList"; 
+import Meals from "./components/MealsList";
 import Cart from "./components/Cart";
 import Menu from "./components/Menu";
 import Contact from "./components/Contact";
 import Account from "./components/Account";
+import Panel from "./components/Panel";
+import UserMessages from "./components/UserMessages";
 
 function App() {
   const user = localStorage.getItem("token");
+  const userRole = localStorage.getItem("role");
+
   return (
     <Routes>
-      {user && <Route path="/" exact element={<Main />} />}
+      {user && <Route path="/" element={<Main />} />}
       <Route path="/" element={<Navigate replace to="/login" />} />
       {user && <Route path="/about" element={<About />} />}
       <Route path="/about" element={<Navigate replace to="/login" />} />
@@ -29,6 +33,10 @@ function App() {
       <Route path="/contact" element={<Navigate replace to="/login" />} />
       {user && <Route path="/menu" element={<Menu />} />}
       <Route path="/menu" element={<Navigate replace to="/login" />} />
+      {user && userRole === "Admin" && <Route path="/panel" element={<Panel />} />}
+      <Route path="/panel" element={<Navigate replace to="/login" />} />
+      {user && <Route path="/panel/messages/:userId" element={<UserMessages />} />}
+      <Route path="/panel/messages/:userId" element={<Navigate replace to="/login" />} />
       {user && <Route path="/account" element={<Account />} />}
       <Route path="/account" element={<Navigate replace to="/login" />} />
       <Route path="/signup" exact element={<Signup />} />

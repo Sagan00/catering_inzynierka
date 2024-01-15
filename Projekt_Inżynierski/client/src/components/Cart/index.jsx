@@ -7,6 +7,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { MDBCard, MDBCardBody, MDBCardImage, MDBCol, MDBContainer, MDBRow } from "mdb-react-ui-kit";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+
 import Navigation from "../Navigation";
 import Foot from "../Foot";
 
@@ -124,12 +125,10 @@ const Cart = () => {
         };
 
         await axios.put("http://localhost:8080/api/order/update", dataToSend).then(navigate("/"));
-        
       }
     } catch (error) {
       console.error("Error updating order:", error);
     }
-    
   };
   const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);

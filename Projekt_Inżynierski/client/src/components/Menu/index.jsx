@@ -41,9 +41,10 @@ const Menu = () => {
     fetchMeals();
   }, []);
 
-  
 
-  const uniqueCategories = Array.from(new Set(meals.map((meal) => meal.category)));
+  const uniqueCategories = Array.from(
+    new Set(meals.map((meal) => meal.category))
+  );
 
   return (
     <div>
