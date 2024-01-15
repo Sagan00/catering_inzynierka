@@ -1,10 +1,10 @@
 import styles from "./styles.module.css";
 import React from "react";
 import Logout from "../Logout";
-import { Link } from "react-router-dom";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Navbar, Nav, Container } from "react-bootstrap";
-
+import { Link } from "react-router-dom";
 const Navigation = () => {
   return (
     <Navbar className={styles.pinkNavbar} bg="pink" variant="light" expand="lg">

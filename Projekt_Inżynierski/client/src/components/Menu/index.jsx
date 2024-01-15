@@ -7,15 +7,21 @@ import MenuItem from "./MenuItem";
 import { Nav } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-const Cart = () => {
+const Menu = () => {
   const menuItemRefs = useRef([
     React.createRef(),
     React.createRef(),
     React.createRef(),
   ]);
-  const [meals, setMeals] = useState([]);
-  const [selectedCategoryIndex, setSelectedCategoryIndex] = useState(0);
+  const scrollToMenuItem = (index) => {
+      if (menuItemRefs.current[index] && menuItemRefs.current[index].current) {
+        menuItemRefs.current[index].current.scrollIntoView({ behavior: "smooth" });
+      }
+    };
 
+  
+  const [selectedCategoryIndex, setSelectedCategoryIndex] = useState(0);
+  const [meals, setMeals] = useState([]);
   useEffect(() => {
     const fetchMeals = async () => {
       try {
@@ -35,11 +41,7 @@ const Cart = () => {
     fetchMeals();
   }, []);
 
-  const scrollToMenuItem = (index) => {
-    if (menuItemRefs.current[index] && menuItemRefs.current[index].current) {
-      menuItemRefs.current[index].current.scrollIntoView({ behavior: "smooth" });
-    }
-  };
+  
 
   const uniqueCategories = Array.from(new Set(meals.map((meal) => meal.category)));
 
@@ -79,4 +81,4 @@ const Cart = () => {
   );
 };
 
-export default Cart;
+export default Menu;

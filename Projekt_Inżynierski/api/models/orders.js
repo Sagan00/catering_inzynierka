@@ -1,6 +1,7 @@
-const { Sequelize, DataTypes } = require("sequelize");
+
 const { Menu } = require("./menu");
 const { User } = require("./user");
+const { Sequelize, DataTypes } = require("sequelize");
 const sequelize = new Sequelize("ctering", "root", "", {
   host: "localhost",
   dialect: "mysql",
@@ -29,7 +30,6 @@ const Orders = sequelize.define('Orders', {
     },
   });
   
-  // Relacje między modelami
   Orders.belongsTo(Menu, { foreignKey: 'id_menu', as: 'menu' });
   Orders.belongsTo(User, { foreignKey: 'id_user', as: 'user' });
 

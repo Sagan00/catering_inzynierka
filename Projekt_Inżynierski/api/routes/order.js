@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { User } = require("../models/user");
+const { Address } = require("../models/address");
 const { Menu } = require("../models/menu");
 const { Orders } = require("../models/orders");
 const { OrdersPaid } = require("../models/orders_paid");
@@ -25,6 +26,18 @@ router.put("/", async (req, res) => {
               email: userEmail,
             },
           });
+          const existingOrder = await Orders.findOne({
+            where: {
+                id_user: userRecord.id,
+            },
+        });
+        if (existingOrder) {
+          await Orders.destroy({
+              where: {
+                  id: existingOrder.id,
+              },
+          });
+      }
 
           const newOrder = await Orders.create({
             id_menu: menuRecord ? menuRecord.id : null,
@@ -108,6 +121,40 @@ router.put("/", async (req, res) => {
       await orderToDelete.destroy();
   
       res.status(200).json({ message: "Order deleted successfully" });
+    } catch (error) {
+      console.error("Error:", error);
+      res.status(500).json({ message: "Internal Server Error" });
+    }
+  });
+  router.post("/user", async (req, res) => {
+    try {
+      const userEmail = req.body.email;
+  
+      const user = await User.findOne({
+        where: { email: userEmail },
+        include: [
+          {
+            model: Address,
+            as: "Address",
+          },
+        ],
+      });
+  
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+  
+      const userData = {
+        firstName: user.firstName,
+        lastName: user.lastName,
+        streetName: user.Address.streetName,
+        houseNumber: user.Address.houseNumber,
+        apartmentNumber: user.Address.apartmentNumber,
+        city: user.Address.city,
+        postalCode: user.Address.postalCode,
+      };
+      console.log("ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooOOOoooooOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo"+userData.streetName);
+      res.json(userData);
     } catch (error) {
       console.error("Error:", error);
       res.status(500).json({ message: "Internal Server Error" });
