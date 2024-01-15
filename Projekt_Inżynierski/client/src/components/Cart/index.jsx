@@ -8,6 +8,9 @@ import { MDBCard, MDBCardBody, MDBCardImage, MDBCol, MDBContainer, MDBRow } from
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
+import Navigation from "../Navigation";
+import Foot from "../Foot";
+
 const Cart = () => {
   const [userOrders, setUserOrders] = useState(null);
   const [error, setError] = useState(null);
@@ -20,10 +23,12 @@ const Cart = () => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const [userData, setUserData] = useState(null);
 
   useEffect(() => {
     const storedEmail = localStorage.getItem("email");
     fetchUserOrders(storedEmail);
+    fetchUserData(storedEmail);
   }, []);
   useEffect(() => {
     const timeDiff = selectedEndDate - selectedStartDate;
@@ -52,7 +57,17 @@ const Cart = () => {
       setTotalCost(newTotalCost);
     }
   };
-
+  const fetchUserData = (email) => {
+    axios
+      .post("http://localhost:8080/api/order/user", { email: email })
+      .then((response) => {
+        setUserData(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching user data:", error);
+        setUserData(null);
+      });
+  };
   const fetchUserOrders = (email) => {
     if (!email) {
       setError("Email not found in local storage.");
@@ -109,7 +124,7 @@ const Cart = () => {
           end_date: selectedEndDate,
         };
 
-        await axios.put("http://localhost:8080/api/order/update", dataToSend);
+        await axios.put("http://localhost:8080/api/order/update", dataToSend).then(navigate("/"));
       }
     } catch (error) {
       console.error("Error updating order:", error);
@@ -120,7 +135,7 @@ const Cart = () => {
 
   return (
     <div>
-      {userOrders && userOrders.length === 0 && <p>Twój koszyk jest pusty.</p>}
+      {userOrders && userOrders.length === 0 && <section className="vh-80" style={{ backgroundColor: "white" }}><Navigation/>Twój koszyk jest pusty.<Foot/></section>}
 
       {error && <p style={{ color: "red" }}>{error}</p>}
 
@@ -302,7 +317,8 @@ const Cart = () => {
                   </Button>
                   <Button
                     className="me-2"
-                    onClick={handleShow} >
+                    onClick={handleShow} 
+                    disabled={!selectedStartDate || !selectedEndDate}>
                     Podsumowanie
                   </Button>
                 </div>
@@ -318,9 +334,16 @@ const Cart = () => {
         <Modal.Body>
         <div className="row">
           <div className="col-9">
-            <div>Imię:</div> 
-            <div>Nazwisko:</div> 
-            <div>Adres:</div>
+              <div>Imię: {userData?.firstName}</div>
+              <div>Nazwisko: {userData?.lastName}</div>
+              <div>
+                Adres: {userData?.streetName}{" "}
+                {userData?.houseNumber}{" "}
+                {userData?.apartmentNumber
+                  ? `, ${userData?.apartmentNumber}`
+                  : ""},{" "}
+                {userData?.postalCode} {userData?.city}
+              </div>
           </div>
           <div className="col-3">
           <p>

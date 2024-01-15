@@ -61,7 +61,7 @@ const NameChange = ({ userData, onUserDataChange }) => {
                     <Col>
                         <Form.Group as={Row} className="mb-3" controlId="formFirstName">
                             <Form.Label column sm="3">
-                                First Name:
+                                Imię:
                             </Form.Label>
                             <Col sm="9">
                                 <Form.Control
@@ -74,7 +74,7 @@ const NameChange = ({ userData, onUserDataChange }) => {
 
                         <Form.Group as={Row} className="mb-3" controlId="formLastName">
                             <Form.Label column sm="3">
-                                Last Name:
+                                Nazwisko:
                             </Form.Label>
                             <Col sm="9">
                                 <Form.Control

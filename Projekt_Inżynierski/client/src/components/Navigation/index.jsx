@@ -1,21 +1,23 @@
 import styles from "./styles.module.css";
 import React from "react";
 import Logout from "../Logout";
-import { Link } from "react-router-dom";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Navbar, Nav, Container } from "react-bootstrap";
-
+import { Link } from "react-router-dom";
 const Navigation = () => {
+  const userRole = localStorage.getItem("role");
+
   return (
     <Navbar className={styles.pinkNavbar} bg="pink" variant="light" expand="lg">
       <Container>
         <Navbar.Brand as={Link} to="/" className="text-white">
-        <img
-                    src={process.env.PUBLIC_URL + "/img/ctering-modified.png"}
-                    alt="Ctering"
-                    width={'120'}
-                    className={styles.meal_image}
-                  />
+          <img
+            src={process.env.PUBLIC_URL + "/img/ctering-modified.png"}
+            alt="Ctering"
+            width={"120"}
+            className={styles.meal_image}
+          />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
@@ -40,6 +42,13 @@ const Navigation = () => {
             </Nav.Link>
           </Nav>
           <Nav className="justify-content-end">
+            <Nav.Item>
+              {userRole === "Admin" && (
+                <Nav.Link as={Link} to="/panel" className="text-white">
+                  Admin panel
+                </Nav.Link>
+              )}
+            </Nav.Item>
             <Nav.Item>
               <Nav.Link as={Link} to="/account" className="text-white">
                 Konto

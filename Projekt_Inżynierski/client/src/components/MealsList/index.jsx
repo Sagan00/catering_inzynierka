@@ -29,12 +29,12 @@ const MealsList = () => {
     <div>
       <Navigation />
       <div className={styles.main_container}>
-        <h2>Meal Table</h2>
+        <h2>Tabela posiłków</h2>
         <table>
           <thead>
             <tr>
-              <th>Name</th>
-              <th>Calories</th>
+              <th>Nazwa</th>
+              <th>Kaloryczność</th>
             </tr>
           </thead>
           <tbody>

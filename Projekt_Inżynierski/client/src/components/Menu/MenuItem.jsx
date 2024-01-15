@@ -82,7 +82,6 @@ const MenuItem = forwardRef(({ meals, category }, ref) => {
         })
         .catch((error) => {
           console.error("Error sending data:", error);
-          // Możesz dodać obsługę błędu, np. wyświetlenie komunikatu o błędzie
         });
       handleShow(true);
     }
