@@ -52,7 +52,6 @@ const Menu = sequelize.define('Menu', {
     },
   });
   
-  // Relacje między modelami
   Menu.belongsTo(Meal, { foreignKey: 'id_breakfast', as: 'breakfast' });
   Menu.belongsTo(Meal, { foreignKey: 'id_seccond_breakfast', as: 'secondBreakfast' });
   Menu.belongsTo(Meal, { foreignKey: 'id_lunch', as: 'lunch' });

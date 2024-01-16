@@ -5,13 +5,14 @@ import Login from "./components/Login";
 import Main from "./components/Main";
 import About from "./components/About";
 import Calc from "./components/Calc";
-import Meals from "./components/MealsList";
+import Meals from "./components/MealsList"; 
 import Cart from "./components/Cart";
 import Menu from "./components/Menu";
 import Contact from "./components/Contact";
 import Account from "./components/Account";
 import Panel from "./components/Panel";
-import UserMessages from "./components/UserMessages";
+import UserMessages from "./components/UserMessages"; 
+import Payment from "./components/Payment";
 
 function App() {
   const user = localStorage.getItem("token");
@@ -19,6 +20,8 @@ function App() {
 
   return (
     <Routes>
+      {user && <Route path="/payment" element={<Payment />} />}
+      <Route path="/payment" element={<Navigate replace to="/login" />} />
       {user && <Route path="/" element={<Main />} />}
       <Route path="/" element={<Navigate replace to="/login" />} />
       {user && <Route path="/about" element={<About />} />}

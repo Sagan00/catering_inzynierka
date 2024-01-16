@@ -50,16 +50,17 @@ const Menu = () => {
     <div>
       <Navigation />
       <div className={styles.main_container}>
-        <h1>Menu</h1>
-        <div className={`sticky-top ${styles.navContainer}`}>
-          <Nav fill variant="tabs" defaultActiveKey="/home">
+        <h1>Sprawdź co dla ciebie<br/> przygotowaliśmy</h1>
+        <img src={process.env.PUBLIC_URL + "/img/tlo.jpg"} alt="tlo"/>
+        <div className={styles.navContainer}>
+          <Nav fill >
             {uniqueCategories.map((category, index) => (
-              <Nav.Item key={category}>
-                <Nav.Link
-                  onClick={() => {
+              <Nav.Item key={category} className={styles.navItem}>
+                <Nav.Link onClick={() => {
                     scrollToMenuItem(index);
                     setSelectedCategoryIndex(index);
                   }}
+                  
                 >
                   {category}
                 </Nav.Link>

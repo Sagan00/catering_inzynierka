@@ -76,6 +76,7 @@ router.put("/update", async (req, res) => {
       total_cost: totalCost,
       start_date: startDate,
       end_date: endDate,
+      is_active: "ACTIVE",
     }); /**/
 
     console.log("Nowe zamówienie utworzone:", newOrder);

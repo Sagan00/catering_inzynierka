@@ -9,7 +9,7 @@ const Navigation = () => {
   const userRole = localStorage.getItem("role");
 
   return (
-    <Navbar className={styles.pinkNavbar} bg="pink" variant="light" expand="lg">
+    <Navbar className={`sticky-top ${styles.pinkNavbar}`} variant="light" expand="lg">
       <Container>
         <Navbar.Brand as={Link} to="/" className="text-white">
           <img

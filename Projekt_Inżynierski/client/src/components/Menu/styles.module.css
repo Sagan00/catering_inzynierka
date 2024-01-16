@@ -1,25 +1,73 @@
 .main_container{
-    padding: 20px 50px;
+    padding: 0px 0px 20px 0px;
+}
+.main_container img{
+  width: 100%;
+}
+.main_container h1{
+  position: absolute;
+  font-size: 85px;
+  top: 70%;
+  left: 25%;
+  color: white;
 }
 /* menuitem css */
 .navContainer {
     position: sticky;
-    top: 0;
+    top: 100px;
     z-index: 1000; /* Adjust z-index as needed */
-    background-color: white; /* Set background color as needed */
+    /*background-color: red; /* Set background color as needed */
+  }
+  .navItem a{
+    color: white;
+    background-color: rgb(252, 155, 171); /* Set background color as needed */
+  }
+  .navItem a:hover{
+    color: white;
+    background-color: rgb(249, 177, 189); /* Set background color as needed */
+    transform: scale(1.15,1.15);
+  }
+  .navItem a:focus{
+    color: white;
+    background-color: rgb(249, 177, 189); /* Set background color as needed */
+    
+  }
+  .menuItem{
+    background-color: rgb(249, 177, 189);
   }
 /* menuitem css */
 .custom_row {
-    height: 60vh;
-    margin: 1px;
+    height: 50vh;
   }
-  
+  .custom_container{
+    margin-top: 50px;
+    width: 70%;
+  }
   .red_col {
-    background-color: white;
+    background-color: rgb(240, 240, 240);
+    border-radius: 25px;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
   }
-  
+  .menuDetails{
+    width:50%;
+    padding: 75px;
+  }
+  .menuDetailsRow{
+    display: flex;
+    flex-direction: row;
+    
+  }
+  .menuDetailsRowFirst{
+    width: 50%;
+  }
+  .menuDetailsRowSecond{
+    width: 50%;
+    text-align: right;
+  }
   .blue_col {
-    background-color: white;
+    
   }
   
   .slider_container {
@@ -27,12 +75,12 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    width: 90%;
+    width: 60%;
 }
 .meal_tile {
     width: 500px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 25px;
     overflow: hidden;
     cursor: pointer;
     transition: transform 0.3s ease;

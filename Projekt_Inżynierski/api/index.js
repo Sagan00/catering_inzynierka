@@ -19,7 +19,6 @@ const { Menu } = require("./models/menu");
 const { Orders } = require("./models/orders");
 const { OrdersPaid } = require("./models/orders_paid");
 const { Form } = require("./models/form");
-const { OrdersPaid } = require("./models/orders_paid");
 
 //middleware
 app.use(express.json());
