@@ -91,38 +91,18 @@ const MenuItem = forwardRef(({ meals, category }, ref) => {
   };
   return (
     <div ref={ref}>
-      <Container fluid>
+      <Container className={styles.custom_container}>
         <Row className={styles.custom_row}>
-          <Col xs={3} className={styles.red_col}>
-            <Table striped variant="danger">
-              <thead>
-                <tr>
-                  <th colSpan={2}>{category}</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Cena za 1 dzień </td>
-                  <td>{totalPrice}</td>
-                </tr>
-                <tr>
-                  <td>Kalorie</td> <td>{totalCalories}</td>
-                </tr>
-                <tr>
-                  <td>Białko</td> <td>{totalProtein}</td>
-                </tr>
-                <tr>
-                  <td>Węglowodany</td> <td>{totalCarbo}</td>
-                </tr>
-                <tr>
-                  <td>Tłuszcze</td>
-                  <td>{totalFat}</td>
-                </tr>
-              </tbody>
-              <Button onClick={handleSelectButtonClick}>Wybierz dietę</Button>
-            </Table>
-          </Col>
-          <Col xs={9} className={styles.blue_col}>
+          <Col xs={12} md={6} lg={6} className={styles.red_col}>
+            <div className={styles.menuDetails}>
+            <div><strong>{category}</strong></div>
+            <div className={styles.menuDetailsRow}><div className={styles.menuDetailsRowFirst}>Cena za 1 dzień</div><div className={styles.menuDetailsRowSecond}>{totalPrice}</div></div>
+            <div className={styles.menuDetailsRow}><div className={styles.menuDetailsRowFirst}>Kalorie</div><div className={styles.menuDetailsRowSecond}>{totalCalories}</div></div>
+            <div className={styles.menuDetailsRow}><div className={styles.menuDetailsRowFirst}>Białko</div><div className={styles.menuDetailsRowSecond}>{totalProtein}</div></div>
+            <div className={styles.menuDetailsRow}><div className={styles.menuDetailsRowFirst}>Węglowodany</div><div className={styles.menuDetailsRowSecond}>{totalCarbo}</div></div>
+            <div className={styles.menuDetailsRow}><div className={styles.menuDetailsRowFirst}>Tłuszcze</div><div className={styles.menuDetailsRowSecond}>{totalFat}</div></div>
+            <Button onClick={handleSelectButtonClick}>Wybierz dietę</Button>
+            </div>
             <div className={styles.slider_container}>
               <Carousel slide={false} interval={null}>
                 {mealsForCategory.map((meal) => (
@@ -144,6 +124,8 @@ const MenuItem = forwardRef(({ meals, category }, ref) => {
                 ))}
               </Carousel>
             </div>
+          </Col>
+                      
             <Modal show={showModal} onHide={clearDetails}>
               <Modal.Header closeButton>
                 <Modal.Title>{selectedMeal && selectedMeal.name}</Modal.Title>
@@ -177,7 +159,7 @@ const MenuItem = forwardRef(({ meals, category }, ref) => {
                 </Button>
               </Modal.Footer>
             </Modal>
-          </Col>
+          
         </Row>
       </Container>
     </div>

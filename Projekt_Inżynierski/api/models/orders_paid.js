@@ -38,6 +38,10 @@ const OrdersPaid = sequelize.define('OrdersPaid', {
       allowNull: false,
       defaultValue: Sequelize.literal('DATE_ADD(CURRENT_DATE, INTERVAL 1 DAY)'),
     },
+    is_active: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
   });
   
   // Relacje między modelami

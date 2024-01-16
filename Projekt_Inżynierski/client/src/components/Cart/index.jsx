@@ -24,7 +24,8 @@ const Cart = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [userData, setUserData] = useState(null);
-
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
   useEffect(() => {
     const storedEmail = localStorage.getItem("email");
     fetchUserOrders(storedEmail);
@@ -124,14 +125,12 @@ const Cart = () => {
           end_date: selectedEndDate,
         };
 
-        await axios.put("http://localhost:8080/api/order/update", dataToSend).then(navigate("/"));
+        await axios.put("http://localhost:8080/api/order/update", dataToSend).then(navigate("/payment"));
       }
     } catch (error) {
       console.error("Error updating order:", error);
     }
   };
-  const tomorrow = new Date();
-  tomorrow.setDate(tomorrow.getDate() + 1);
 
   return (
     <div>
@@ -282,7 +281,8 @@ const Cart = () => {
                               placeholderText={"Please select a date"}
                               selected={selectedEndDate}
                               onChange={(date) => setSelectedEndDate(date)}
-                              minDate={tomorrow}
+                              minDate={selectedStartDate}
+                              disabled={!selectedStartDate}
                             />
                           </p>
                         </div>
@@ -337,12 +337,9 @@ const Cart = () => {
               <div>Imię: {userData?.firstName}</div>
               <div>Nazwisko: {userData?.lastName}</div>
               <div>
-                Adres: {userData?.streetName}{" "}
-                {userData?.houseNumber}{" "}
-                {userData?.apartmentNumber
-                  ? `, ${userData?.apartmentNumber}`
-                  : ""},{" "}
-                {userData?.postalCode} {userData?.city}
+                Ulica: {userData?.streetName}<br/>
+                Numer domu / mieszkania: {userData?.houseNumber}{"/"}{userData?.apartmentNumber ? `${userData?.apartmentNumber}` : ""}<br/>
+                Kod pocztowy i miasto: {userData?.postalCode} {userData?.city}
               </div>
           </div>
           <div className="col-3">
