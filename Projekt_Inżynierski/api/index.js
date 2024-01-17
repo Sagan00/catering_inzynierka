@@ -149,7 +149,7 @@ app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/mealsList", mealsList);
 app.use("/api/menu", menuRoutes);
-app.use("/api/user", userAccountRoutes);
+app.use("/api/account", userAccountRoutes);
 app.use("/api/order", orderRoutes);
 app.use("/api/cart_meals", cartMeals);
 app.use("/api/contactForm", contactForm);

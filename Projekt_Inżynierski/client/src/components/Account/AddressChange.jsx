@@ -18,7 +18,7 @@ const AddressChange = ({ onAddressAdded }) => {
 
     if (userEmail) {
       axios
-        .get(`http://localhost:8080/api/user/address`, {
+        .get(`http://localhost:8080/api/account/address`, {
           headers: {
             Authorization: userEmail,
           },
@@ -52,7 +52,7 @@ const AddressChange = ({ onAddressAdded }) => {
     }
 
     axios
-      .post(`http://localhost:8080/api/user/address`, newAddress, {
+      .post(`http://localhost:8080/api/account/address`, newAddress, {
         headers: {
           Authorization: userEmail,
         },
