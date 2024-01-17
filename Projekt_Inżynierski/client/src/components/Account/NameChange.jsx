@@ -25,12 +25,12 @@ const NameChange = ({ userData, onUserDataChange }) => {
         e.preventDefault();
 
         axios
-            .put(`http://localhost:8080/api/user/${userData.email}`, updatedUserData)
+            .put(`http://localhost:8080/api/account/${userData.email}`, updatedUserData)
             .then((response) => {
                 console.log("Data updated successfully:", response.data);
 
                 axios
-                    .get(`http://localhost:8080/api/user?email=${userData.email}`)
+                    .get(`http://localhost:8080/api/account?email=${userData.email}`)
                     .then((response) => {
                         onUserDataChange(response.data);
                         setShow(true);

@@ -6,6 +6,7 @@ const { Form } = require("../models/form");
 const { Orders } = require("../models/orders");
 const { OrdersPaid } = require("../models/orders_paid");
 const { Address } = require("../models/address");
+const { Menu } = require("../models/menu");
 
 // Route to get all users
 router.get("/users", async (req, res) => {
@@ -91,6 +92,70 @@ router.delete("/message/:messageId", async (req, res) => {
     res.status(204).end(); // No content response
   } catch (error) {
     console.error("Error deleting message:", error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+// Endpoint for getting user order history
+router.get("/userOrderHistory/:userId", async (req, res) => {
+  const userId = req.params.userId;
+
+  try {
+    const user = await User.findByPk(userId);
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    const orderHistory = await OrdersPaid.findAll({
+      where: { id_user: userId },
+      attributes: ["id", "total_cost", "start_date", "end_date", "is_active"],
+      include: [
+        {
+          model: Menu,
+          as: "menu",
+          attributes: ["id", "dietName"],
+        },
+      ],
+    });
+
+    res.json(orderHistory);
+  } catch (error) {
+    console.error("Error fetching order history:", error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+// New endpoint for canceling an order
+router.put("/cancelOrder/:orderId", async (req, res) => {
+  const orderId = req.params.orderId;
+
+  try {
+    // Update the order status to INACTIVE
+    await OrdersPaid.update(
+      { is_active: 'INACTIVE' },
+      { where: { id: orderId } }
+    );
+
+    res.status(204).end(); // No content response
+  } catch (error) {
+    console.error("Error canceling order:", error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+router.delete("/deleteOrder/:orderId", async (req, res) => {
+  const orderId = req.params.orderId;
+
+  try {
+    // Delete the order with the given ID
+    await OrdersPaid.destroy({
+      where: { id: orderId },
+    });
+
+    res.status(204).end(); // No content response
+  } catch (error) {
+    console.error("Error deleting order:", error);
     res.status(500).send("Internal Server Error");
   }
 });

@@ -11,8 +11,10 @@ import Menu from "./components/Menu";
 import Contact from "./components/Contact";
 import Account from "./components/Account";
 import Panel from "./components/Panel";
+import PanelUserOrderHistory from "./components/PanelUserOrderHistory";
 import UserMessages from "./components/UserMessages"; 
 import Payment from "./components/Payment";
+import OrderHistory from "./components/OrderHistory";
 
 function App() {
   const user = localStorage.getItem("token");
@@ -40,8 +42,12 @@ function App() {
       <Route path="/panel" element={<Navigate replace to="/login" />} />
       {user && <Route path="/panel/messages/:userId" element={<UserMessages />} />}
       <Route path="/panel/messages/:userId" element={<Navigate replace to="/login" />} />
+      {user && <Route path="/panel/userOrderHistory/:userId" element={<PanelUserOrderHistory />} />}
+      <Route path="/panel/userOrderHistory/:userId" element={<Navigate replace to="/login" />} />
       {user && <Route path="/account" element={<Account />} />}
       <Route path="/account" element={<Navigate replace to="/login" />} />
+      {user && <Route path="/orderHistory" element={<OrderHistory />} />}
+      <Route path="/orderHistory" element={<Navigate replace to="/login" />} />
       <Route path="/signup" exact element={<Signup />} />
       <Route path="/login" exact element={<Login />} />
     </Routes>
