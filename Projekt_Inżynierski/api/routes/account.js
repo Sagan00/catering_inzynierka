@@ -1,6 +1,7 @@
 // routes/account.js
 const express = require("express");
 const router = express.Router();
+const bcrypt = require("bcrypt");
 const { User } = require("../models/user");
 const { Address } = require("../models/address");
 const { OrdersPaid } = require("../models/orders_paid");
@@ -48,6 +49,38 @@ router.put("/:email", async (req, res) => {
     await User.update(updatedUserData, { where: { email: userEmail } });
 
     res.json({ message: "Data updated successfully" });
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+});
+
+//Zmiana hasła
+router.put("/changePassword/:email", async (req, res) => {
+  try {
+    const userEmail = req.params.email;
+    const oldPassword = req.body.oldPassword;
+    const newPassword = req.body.newPassword;
+
+    const user = await User.findOne({ where: { email: userEmail } });
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Sprawdź, czy stare hasło jest poprawne
+    const isPasswordValid = await bcrypt.compare(oldPassword, user.password);
+
+    if (!isPasswordValid) {
+      return res.status(400).json({ message: "Nieprawidłowe stare hasło" });
+    }
+
+    // Zaktualizuj hasło
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    user.password = hashedPassword;
+    await user.save();
+
+    res.json({ message: "Password changed successfully" });
   } catch (error) {
     console.error("Error:", error);
     res.status(500).json({ message: "Internal Server Error" });

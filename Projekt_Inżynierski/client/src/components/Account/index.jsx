@@ -9,12 +9,14 @@ import Foot from "../Foot";
 import NameChange from "./NameChange";
 import AddressChange from "./AddressChange";
 import PhoneNumberChange from "./PhoneNumberChange";
+import PasswordChangeForm from "./PasswordChangeForm";
 
 const Account = () => {
   const [userData, setUserData] = useState(null);
   const [userAddress, setUserAddress] = useState(null);
 
   const [showNameForm, setShowNameForm] = useState(false);
+  const [showPasswordForm, setShowPasswordForm] = useState(false);
   const [showAddressForm, setShowAddressForm] = useState(false);
   const [showPhoneNumberForm, setShowPhoneNumberForm] = useState(false);
 
@@ -49,6 +51,10 @@ const Account = () => {
 
   const handleNameButtonClick = () => {
     setShowNameForm(!showNameForm);
+  };
+
+  const handlePasswordButtonClick = () => {
+    setShowPasswordForm(!showPasswordForm);
   };
 
   const handleAddressButtonClick = () => {
@@ -110,6 +116,9 @@ const Account = () => {
             <Button onClick={handleNameButtonClick} variant="primary">
               Zmień imię i nazwisko
             </Button>
+            <Button onClick={handlePasswordButtonClick} variant="primary">
+              Zmień hasło
+            </Button>
             <Button onClick={handlePhoneNumberButtonClick} variant="primary">
               Zmień numer telefonu
             </Button>
@@ -127,6 +136,7 @@ const Account = () => {
                 onUserDataChange={handleUserDataChange}
               />
             )}
+            {showPasswordForm && <PasswordChangeForm />}
             {showPhoneNumberForm && (
               <PhoneNumberChange
                 userData={userData}
