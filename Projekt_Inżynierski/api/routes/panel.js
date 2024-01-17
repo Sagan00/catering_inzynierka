@@ -126,4 +126,38 @@ router.get("/userOrderHistory/:userId", async (req, res) => {
   }
 });
 
+// New endpoint for canceling an order
+router.put("/cancelOrder/:orderId", async (req, res) => {
+  const orderId = req.params.orderId;
+
+  try {
+    // Update the order status to INACTIVE
+    await OrdersPaid.update(
+      { is_active: 'INACTIVE' },
+      { where: { id: orderId } }
+    );
+
+    res.status(204).end(); // No content response
+  } catch (error) {
+    console.error("Error canceling order:", error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+router.delete("/deleteOrder/:orderId", async (req, res) => {
+  const orderId = req.params.orderId;
+
+  try {
+    // Delete the order with the given ID
+    await OrdersPaid.destroy({
+      where: { id: orderId },
+    });
+
+    res.status(204).end(); // No content response
+  } catch (error) {
+    console.error("Error deleting order:", error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
 module.exports = router;

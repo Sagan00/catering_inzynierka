@@ -11,24 +11,46 @@ const PanelUserOrderHistory = () => {
   const [orderHistory, setOrderHistory] = useState([]);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const fetchOrderHistory = async () => {
-      try {
-        const response = await axios.get(
-          `http://localhost:8080/api/panel/userOrderHistory/${userId}`
-        );
-        setOrderHistory(response.data);
-      } catch (error) {
-        setError(error.message);
-      }
-    };
+  const fetchOrderHistory = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:8080/api/panel/userOrderHistory/${userId}`
+      );
+      setOrderHistory(response.data);
+    } catch (error) {
+      setError(error.message);
+    }
+  };
 
+  useEffect(() => {
     fetchOrderHistory();
   }, [userId]);
 
   const formatDate = (dateString) => {
     const options = { year: "numeric", month: "long", day: "numeric" };
     return new Date(dateString).toLocaleDateString(undefined, options);
+  };
+
+  const handleCancelOrder = async (orderId) => {
+    try {
+      await axios.put(`http://localhost:8080/api/panel/cancelOrder/${orderId}`);
+      // Reload order history after canceling an order
+      fetchOrderHistory();
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+
+  const handleDeleteOrder = async (orderId) => {
+    try {
+      await axios.delete(
+        `http://localhost:8080/api/panel/deleteOrder/${orderId}`
+      );
+      // Reload order history after deleting an order
+      fetchOrderHistory();
+    } catch (error) {
+      setError(error.message);
+    }
   };
 
   return (
@@ -46,6 +68,7 @@ const PanelUserOrderHistory = () => {
                   <th>Data rozpoczęcia</th>
                   <th>Data zakończenia</th>
                   <th>Aktywne</th>
+                  <th>Akcje</th>
                 </tr>
               </thead>
               <tbody>
@@ -56,6 +79,18 @@ const PanelUserOrderHistory = () => {
                     <td>{formatDate(order.start_date)}</td>
                     <td>{formatDate(order.end_date)}</td>
                     <td>{order.is_active}</td>
+                    <td>
+                      {order.is_active === "ACTIVE" && (
+                        <>
+                          <button onClick={() => handleCancelOrder(order.id)}>
+                            Anuluj
+                          </button>
+                        </>
+                      )}
+                      <button onClick={() => handleDeleteOrder(order.id)}>
+                        Usuń
+                      </button>
+                    </td>
                   </tr>
                 ))}
               </tbody>
