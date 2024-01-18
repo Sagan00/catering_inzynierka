@@ -15,10 +15,8 @@ const Calc = () => {
         age: '',
         weight: '',
         height: '',
-        // Dodaj inne pola do przechowywania błędów
       };
     const [form, setForm] = useState({ age: 0, weight: 0, height: 0 });
-    //const [form, setForm] = useState({ age: '', weight: '', height: '' });
     const [errors, setErrors] = useState(initialErrors);
     const elementRef = useRef(null);
 
@@ -32,7 +30,6 @@ const Calc = () => {
         let valid = true;
         const newErrors = { ...initialErrors };
     
-        // Walidacja pól
         if (form.age <= 10 || form.age >= 120) {
           newErrors.age = 'Wprowadź poprawny wiek (10-120)';
           valid = false;
@@ -46,7 +43,6 @@ const Calc = () => {
           valid = false;
         }
     
-        // Ustawianie nowych błędów
         setErrors(newErrors);
     
         return valid;
@@ -56,9 +52,9 @@ const Calc = () => {
         let bmrResult = 0;
         const { weight, height, age } = form;
         if (gender === "male") {
-            bmrResult = 66 + (13.75 * weight) + (5.003 * height) - (6.755 * age);
+            bmrResult = 66.47 + (13.7 * weight) + (5.0 * height) - (6.76 * age);
         } else {
-            bmrResult = 655 + (9.563 * weight) + (1.85 * height) - (4.676 * age);
+            bmrResult = 655.1 + (9.567 * weight) + (1.85 * height) - (4.68 * age);
         }
         const activityFactor = activityLevel; 
 
@@ -140,9 +136,7 @@ const Calc = () => {
                         <option value="lose">Schudnięcie</option>
                         <option value="gain">Zwiększenie masy ciała</option>
                     </select>
-                    <button ref={elementRef} onClick={() => {
-                        handleSubmit();
-                        }}>
+                    <button ref={elementRef} onClick={() => { handleSubmit(); }}>
                         Oblicz
                     </button>
                 </div>
