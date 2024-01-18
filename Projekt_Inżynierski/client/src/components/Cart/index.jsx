@@ -4,10 +4,17 @@ import axios from "axios";
 import DatePicker from "react-datepicker";
 import { useNavigate } from "react-router-dom";
 import "react-datepicker/dist/react-datepicker.css";
-import { MDBCard, MDBCardBody, MDBCardImage, MDBCol, MDBContainer, MDBRow } from "mdb-react-ui-kit";
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
-
+import {
+  MDBCard,
+  MDBCardBody,
+  MDBCardImage,
+  MDBCol,
+  MDBContainer,
+  MDBRow,
+} from "mdb-react-ui-kit";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+import styles from "./styles.module.css";
 import Navigation from "../Navigation";
 import Foot from "../Foot";
 
@@ -125,7 +132,9 @@ const Cart = () => {
           end_date: selectedEndDate,
         };
 
-        await axios.put("http://localhost:8080/api/order/update", dataToSend).then(navigate("/payment"));
+        await axios
+          .put("http://localhost:8080/api/order/update", dataToSend)
+          .then(navigate("/payment"));
       }
     } catch (error) {
       console.error("Error updating order:", error);
@@ -134,7 +143,13 @@ const Cart = () => {
 
   return (
     <div>
-      {userOrders && userOrders.length === 0 && <section className="vh-80" style={{ backgroundColor: "white" }}><Navigation/>Twój koszyk jest pusty.<Foot/></section>}
+      {userOrders && userOrders.length === 0 && (
+        <section className="vh-80" style={{ backgroundColor: "white" }}>
+          <Navigation />
+          Twój koszyk jest pusty.
+          <Foot />
+        </section>
+      )}
 
       {error && <p style={{ color: "red" }}>{error}</p>}
 
@@ -263,7 +278,7 @@ const Cart = () => {
                           </p>
                           <p className="lead fw-normal mb-0">
                             <DatePicker
-                              placeholderText={"Please select a date"}
+                              placeholderText={"Wprowadź datę początkową"}
                               selected={selectedStartDate}
                               onChange={(date) => setSelectedStartDate(date)}
                               minDate={tomorrow}
@@ -278,7 +293,7 @@ const Cart = () => {
                           </p>
                           <p className="lead fw-normal mb-0">
                             <DatePicker
-                              placeholderText={"Please select a date"}
+                              placeholderText={"Wprowadź datę końcową"}
                               selected={selectedEndDate}
                               onChange={(date) => setSelectedEndDate(date)}
                               minDate={selectedStartDate}
@@ -317,8 +332,9 @@ const Cart = () => {
                   </Button>
                   <Button
                     className="me-2"
-                    onClick={handleShow} 
-                    disabled={!selectedStartDate || !selectedEndDate}>
+                    onClick={handleShow}
+                    disabled={!selectedStartDate || !selectedEndDate}
+                  >
                     Podsumowanie
                   </Button>
                 </div>
@@ -327,36 +343,55 @@ const Cart = () => {
           </MDBContainer>
         </section>
       )}
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
+      <Modal show={show} onHide={handleClose} centered>
+        <Modal.Header closeButton className={styles.modalHead}>
           <Modal.Title>Potwierdź zamówienie</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        <div className="row">
-          <div className="col-9">
-              <div>Imię: {userData?.firstName}</div>
-              <div>Nazwisko: {userData?.lastName}</div>
-              <div>
-                Ulica: {userData?.streetName}<br/>
-                Numer domu / mieszkania: {userData?.houseNumber}{"/"}{userData?.apartmentNumber ? `${userData?.apartmentNumber}` : ""}<br/>
-                Kod pocztowy i miasto: {userData?.postalCode} {userData?.city}
+          <div className="row">
+            <div className="col-9">
+              <div className="mb-3">
+                <div className={styles.modal_row}>
+                  <div className={styles.modalBody1}>Imię:</div>{" "}
+                  <div className={styles.modalBody2}>{userData?.firstName}</div>
+                </div>
               </div>
+              <div className="mb-3">
+                <div className={styles.modal_row}>
+                  <div className={styles.modalBody1}>Nazwisko:</div>
+                  <div className={styles.modalBody2}> {userData?.lastName}</div>
+                </div>
+              </div>
+              <div className={styles.modal_row}>
+                <div className={styles.modalBody1}>Adres:</div>
+                <div className={styles.modalBody2}>
+                  ul. {userData?.streetName} {userData?.houseNumber}
+                  {"/"}
+                  {userData?.apartmentNumber
+                    ? `${userData?.apartmentNumber}`
+                    : ""}
+                  <br />
+                  {userData?.postalCode} {userData?.city}
+                </div>
+              </div>
+            </div>
+            <div className="col-3">
+              <p className="mb-3">
+                <strong>Cena:</strong> {totalCost}
+              </p>
+            </div>
           </div>
-          <div className="col-3">
-          <p>
-            <strong>Cena:</strong> {totalCost}
-          </p>
-          <Button variant="primary" onClick={() => updateOrder(selectedStartDate, selectedEndDate, totalCost)}>
-            Płatność
-          </Button>
-        </div>
-      </div>
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Anuluj
+        <Modal.Footer className="bg-light">
+          <Button
+            variant="success"
+            onClick={() =>
+              updateOrder(selectedStartDate, selectedEndDate, totalCost)
+            }
+          >
+            {" "}
+            Płatność{" "}
           </Button>
-          
         </Modal.Footer>
       </Modal>
     </div>
