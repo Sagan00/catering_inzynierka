@@ -1,3 +1,4 @@
+// components/Account/AddressChange.jsx
 import React, { useState, useEffect } from "react";
 import { Form, Row, Col, Button, Toast, ToastContainer } from "react-bootstrap";
 import axios from "axios";
@@ -12,6 +13,7 @@ const AddressChange = ({ onAddressAdded }) => {
     postalCode: "",
   });
   const [formVisible, setFormVisible] = useState(true);
+  const [postalCodeError, setPostalCodeError] = useState('');
 
   useEffect(() => {
     const userEmail = localStorage.getItem("email");
@@ -39,6 +41,14 @@ const AddressChange = ({ onAddressAdded }) => {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setNewAddress((prevData) => ({ ...prevData, [name]: value }));
+
+    // Validate postal code format
+    const postalCodePattern = /^\d{2}-\d{3}$/; // Assuming a format like "12-345"
+    if (name === 'postalCode' && !postalCodePattern.test(value)) {
+      setPostalCodeError('Nieprawidłowy format kodu pocztowego. Poprawny format to XX-XXX.');
+    } else {
+      setPostalCodeError('');
+    }
   };
 
   const handleSubmit = (e) => {
@@ -159,7 +169,11 @@ const AddressChange = ({ onAddressAdded }) => {
                   name="postalCode"
                   value={newAddress.postalCode}
                   onChange={handleInputChange}
+                  isInvalid={!!postalCodeError}
                 />
+                <Form.Control.Feedback type="invalid">
+                  {postalCodeError}
+                </Form.Control.Feedback>
               </Col>
             </Form.Group>
 

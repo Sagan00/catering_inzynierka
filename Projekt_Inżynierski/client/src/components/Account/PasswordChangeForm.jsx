@@ -16,11 +16,23 @@ const PasswordChangeForm = () => {
     setFormData({ ...formData, [target.name]: target.value });
   };
 
+  const isPasswordValid = (password) => {
+    const regex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    return regex.test(password);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
       const userEmail = localStorage.getItem("email");
+
+      if (!isPasswordValid(formData.newPassword)) {
+        setError(
+          "Hasło musi składać się z conajmniej 8 znaków, zaczynać się z wielkiej litery i zawierać cyfrę oraz znak specjalny"
+        );
+        return;
+      }
 
       const response = await axios.put(
         `http://localhost:8080/api/account/changePassword/${userEmail}`,
