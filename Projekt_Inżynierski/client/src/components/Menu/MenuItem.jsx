@@ -131,9 +131,12 @@ const MenuItem = forwardRef(({ meals, category }, ref) => {
                 <Modal.Title>{selectedMeal && selectedMeal.name}</Modal.Title>
               </Modal.Header>
               <Modal.Body>
-                <p>{selectedMeal && selectedMeal.description}</p>
-                <p>Category: {selectedMeal && selectedMeal.category}</p>
-                <p>Price: {selectedMeal && selectedMeal.price}</p>
+                <p>Opis: {selectedMeal && selectedMeal.description}</p>
+                <p>Cena: {selectedMeal && selectedMeal.price}</p>
+                <p>B: {selectedMeal && selectedMeal.protein}</p>
+                <p>W: {selectedMeal && selectedMeal.carbo}</p>
+                <p>T: {selectedMeal && selectedMeal.fat}</p>
+                <p>Kalorie: {selectedMeal && selectedMeal.calories}</p>
                 <img
                   src={
                     selectedMeal &&
