@@ -54,13 +54,10 @@ router.delete('/:mealId', async (req, res) => {
 });
 router.post('/', async (req, res) => {
   try {
-    // Pobierz dane potrawy z ciała żądania
     const newMealData = req.body;
 
-    // Dodaj nową potrawę do bazy danych
     const newMeal = await Meal.create(newMealData);
 
-    // Odpowiedz klientowi z dodaną potrawą
     res.status(201).json(newMeal);
   } catch (error) {
     console.error('Error:', error);

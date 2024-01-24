@@ -23,127 +23,23 @@ const { Form } = require("./models/form");
 //middleware
 app.use(express.json());
 app.use(cors());
-User.sync()
-  .then(() => {
-    console.log(
-      "Tabela Users została utworzona lub zsynchronizowana z bazą danych."
-    );
-  })
-  .catch((error) => {
-    console.error("Błąd synchronizacji tabeli:", error);
-  });
-Meal.sync()
-.then(() => {
-  console.log(
-    "Tabela Meals została utworzona lub zsynchronizowana z bazą danych."
-  );
-})
-.catch((error) => {
-  console.error("Błąd synchronizacji tabeli:", error);
-});
-Menu.sync()
-.then(() => {
-  console.log(
-    "Tabela Menu została utworzona lub zsynchronizowana z bazą danych."
-  );
-})
-.catch((error) => {
-  console.error("Błąd synchronizacji tabeli:", error);
-});
-Orders.sync()
-.then(() => {
-  console.log(
-    "Tabela Orders została utworzona lub zsynchronizowana z bazą danych."
-  );
-})
-.catch((error) => {
-  console.error("Błąd synchronizacji tabeli:", error);
-});
-OrdersPaid.sync()
-.then(() => {
-  console.log(
-    "Tabela OrdersPaid została utworzona lub zsynchronizowana z bazą danych."
-  );
-})
-.catch((error) => {
-  console.error("Błąd synchronizacji tabeli:", error);
-});
-Form.sync()
-.then(() => {
-  console.log(
-    "Tabela Form została utworzona lub zsynchronizowana z bazą danych."
-  );
-})
-.catch((error) => {
-  console.error("Błąd synchronizacji tabeli:", error);
-});
+const syncAndLog = async (model, tableName) => {
+  try {
+    //await model.sync();
+    //console.log(`Tabela ${tableName} została utworzona lub zsynchronizowana z bazą danych.`);
+  } catch (error) {
+    //console.error(`Błąd synchronizacji tabeli ${tableName}:`, error);
+  }
+};
 
-Role.sync()
-  .then(() => {
-    console.log(
-      "Tabela Roles została utworzona lub zsynchronizowana z bazą danych."
-    );
-  })
-  .catch((error) => {
-    console.error("Błąd synchronizacji tabeli:", error);
-  });
-
-Address.sync()
-  .then(() => {
-    console.log(
-      "Tabela Address została utworzona lub zsynchronizowana z bazą danych."
-    );
-  })
-  .catch((error) => {
-    console.error("Błąd synchronizacji tabeli:", error);
-  });
-
-Meal.sync()
-  .then(() => {
-    console.log(
-      "Tabela Meals została utworzona lub zsynchronizowana z bazą danych."
-    );
-  })
-  .catch((error) => {
-    console.error("Błąd synchronizacji tabeli:", error);
-  });
-Menu.sync()
-  .then(() => {
-    console.log(
-      "Tabela Menu została utworzona lub zsynchronizowana z bazą danych."
-    );
-  })
-  .catch((error) => {
-    console.error("Błąd synchronizacji tabeli:", error);
-  });
-Orders.sync()
-  .then(() => {
-    console.log(
-      "Tabela Orders została utworzona lub zsynchronizowana z bazą danych."
-    );
-  })
-  .catch((error) => {
-    console.error("Błąd synchronizacji tabeli:", error);
-  });
-
-OrdersPaid.sync()
-  .then(() => {
-    console.log(
-      "Tabela OrdersPaid została utworzona lub zsynchronizowana z bazą danych."
-    );
-  })
-  .catch((error) => {
-    console.error("Błąd synchronizacji tabeli:", error);
-  });
-Form.sync()
-  .then(() => {
-    console.log(
-      "Tabela Form została utworzona lub zsynchronizowana z bazą danych."
-    );
-  })
-  .catch((error) => {
-    console.error("Błąd synchronizacji tabeli:", error);
-  });
+syncAndLog(Meal, 'Meals');
+syncAndLog(Menu, 'Menu');
+syncAndLog(Orders, 'Orders');
+syncAndLog(OrdersPaid, 'OrdersPaid');
+syncAndLog(Form, 'Form');
+syncAndLog(Role, 'Roles');
+syncAndLog(Address, 'Address');
+syncAndLog(User, 'Users');
 
 app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
@@ -155,5 +51,8 @@ app.use("/api/cart_meals", cartMeals);
 app.use("/api/contactForm", contactForm);
 app.use("/api/panel", panelRoutes);
 
-const port = process.env.PORT || 8080;
-app.listen(port, () => console.log(`Nasłuchiwanie na porcie ${port}`));
+const server = app.listen(8080, () => {
+  console.log('Nasłuchiwanie na porcie 8080');
+});
+
+module.exports = server;

@@ -86,7 +86,7 @@ const Signup = () => {
                         {error && <div
                             className={styles.error_msg}>{error}</div>}
                         <button type="submit"
-                            className={styles.green_btn}>
+                            className={styles.pink_btn}>
                             Zarejestruj
                         </button>
                     </form>
