@@ -377,7 +377,7 @@ const Cart = () => {
             </div>
             <div className="col-3">
               <p className="mb-3">
-                <strong>Cena:</strong> {totalCost}
+                <strong>Cena:</strong> {totalCost.toFixed(2)}
               </p>
             </div>
           </div>

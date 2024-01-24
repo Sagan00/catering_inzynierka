@@ -14,7 +14,7 @@ router.get("/users", async (req, res) => {
     const users = await User.findAll({
       attributes: ["id", "firstName", "lastName", "email", "roleId"],
       where: {
-        roleId: 1, // Dodaj klauzulę, aby uwzględnić tylko użytkowników, których roleId wynosi 1 = User
+        roleId: 1,
       },
     });
     res.json(users);
