@@ -7,6 +7,7 @@ const PhoneNumberChange = ({ userData, onUserDataChange }) => {
   const [show, setShow] = useState(false);
   const [updatedPhoneNumber, setUpdatedPhoneNumber] = useState(userData.phoneNumber);
   const [formVisible, setFormVisible] = useState(true);
+  const [phoneNumberError, setPhoneNumberError] = useState('');
 
   useEffect(() => {
     setUpdatedPhoneNumber(userData.phoneNumber);
@@ -15,6 +16,13 @@ const PhoneNumberChange = ({ userData, onUserDataChange }) => {
   const handleInputChange = (e) => {
     const { value } = e.target;
     setUpdatedPhoneNumber(value);
+
+    const phoneNumberPattern = /^\d{9}$/; 
+    if (!phoneNumberPattern.test(value)) {
+      setPhoneNumberError('Numer telefonu powinien składać się z 9 cyfr.');
+    } else {
+      setPhoneNumberError('');
+    }
   };
 
   const handleSubmit = (e) => {
@@ -64,11 +72,15 @@ const PhoneNumberChange = ({ userData, onUserDataChange }) => {
                   name="phoneNumber"
                   value={updatedPhoneNumber}
                   onChange={handleInputChange}
+                  isInvalid={!!phoneNumberError}
                 />
+                <Form.Control.Feedback type="invalid">
+                  {phoneNumberError}
+                </Form.Control.Feedback>
               </Col>
             </Form.Group>
 
-            <Button type="submit" variant="primary">
+            <Button type="submit" variant="primary" disabled={!!phoneNumberError}>
               Zapisz zmiany
             </Button>
           </Col>

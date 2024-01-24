@@ -171,13 +171,13 @@ const Panel = () => {
                   <td>{user.lastName}</td>
                   <td>{user.email}</td>
                   <td>
-                    <button onClick={() => handleDeleteUser(user.id)}>
+                  <button className={styles.smallButton} onClick={() => handleDeleteUser(user.id)}>
                       Usuń
                     </button>
-                    <button onClick={() => handleMessages(user.id)}>
+                    <button className={styles.smallButton} onClick={() => handleMessages(user.id)}>
                       Wiadomości
                     </button>
-                    <button onClick={() => handleUserOrderHistory(user.id)}>
+                    <button className={styles.smallButton} onClick={() => handleUserOrderHistory(user.id)}>
                       Historia zamówień
                     </button>
                   </td>

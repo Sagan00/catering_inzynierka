@@ -26,7 +26,6 @@ table {
 th, td {
   border: 1px solid #ddd;
   padding: 8px;
-  text-align: left;
 }
 
 th {
@@ -35,4 +34,8 @@ th {
 
 button {
   margin-right: 5px;
+}
+
+.smallButton{
+  width: 80%;
 }
